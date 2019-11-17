@@ -1,0 +1,3 @@
+[submodule "The-Forge"]
+	path = The-Forge
+	url = https://github.com/ConfettiFX/The-Forge.git

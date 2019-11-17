@@ -1,0 +1,9 @@
+[Bb]uild
+*.exe
+*.so
+*.dll
+*.a
+*.lib
+*.app
+.vscode
+.DS_Store
