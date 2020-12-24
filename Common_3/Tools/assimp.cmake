@@ -301,5 +301,3 @@ set(ASSIMP_OPENDDL_FILES
     ../../The-Forge/Common_3/ThirdParty/OpenSource/assimp/4.1.0/contrib/openddlparser/include/openddlparser/OpenDDLStream.h
     ../../The-Forge/Common_3/ThirdParty/OpenSource/assimp/4.1.0/contrib/openddlparser/include/openddlparser/Value.h
 )
-
-set()

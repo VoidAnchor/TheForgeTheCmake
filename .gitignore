@@ -7,3 +7,5 @@
 *.app
 .vscode
 .DS_Store
+.idea
+cmake-build*

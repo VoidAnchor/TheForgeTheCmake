@@ -1,4 +1,10 @@
+if(OZZ MATCHES ON)
+    include(ozz.cmake)
+endif()
 
-include(ozz.cmake)
-include(assimp.cmake)
-include(AssetPipeline.cmake)
+if(ASSIMP MATCHES ON)
+    include(assimp.cmake)
+    include(AssetPipeline.cmake)
+endif()
+
+include(SpirVTools.cmake)

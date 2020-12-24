@@ -7,6 +7,9 @@ set(LINUX OFF)
 set(WINDOWS OFF)
 set(VULKAN OFF)
 
+set(ASSIMP OFF)
+set(OZZ OFF)
+
 set(RENDER_LIBRARIES "")
 set(RENDER_INCLUDES "")
 
@@ -47,8 +50,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     message("Linux detected. Generating Linux targets.")
     set(${LINUX} ON)
 
+    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+        "VULKAN"
+    )
+
     find_package(Vulkan REQUIRED)
-    if (Vulkan_FOUND MATCHES True)
+    if (Vulkan_FOUND MATCHES "True")
         set(RENDER_LIBRARIES ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
         set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
     endif()
@@ -57,6 +64,16 @@ endif()
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message("Windows detected. Generating Windows targets.")
     set(${WINDOWS} ON)
+
+    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+        "VULKAN"
+    )
+
+    find_package(Vulkan REQUIRED)
+    if (Vulkan_FOUND MATCHES TRUE)
+        set(RENDER_LIBRARIES ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
+        set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
+    endif()
 endif()
 
 add_subdirectory(The-Forge/Common_3/ThirdParty/OpenSource/gainput/)
