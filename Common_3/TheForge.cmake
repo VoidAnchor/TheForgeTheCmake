@@ -20,14 +20,14 @@ set(OS_IMAGE_FILES
 
 source_group(OS\\Image FILES ${OS_IMAGE_FILES})
 
-if (APPLE_PLATFORM MATCHES ON)
-    set(OS_MACOS_FILES
-        ../The-Forge/Common_3/OS/macOS/macOSBase.mm
-        ../The-Forge/Common_3/OS/macOS/macOSFileSystem.mm
-        ../The-Forge/Common_3/OS/macOS/macOSLog.cpp
-        ../The-Forge/Common_3/OS/macOS/macOSThread.cpp
-    )
+set(OS_MACOS_FILES
+    ../The-Forge/Common_3/OS/macOS/macOSBase.mm
+    ../The-Forge/Common_3/OS/macOS/macOSFileSystem.mm
+    ../The-Forge/Common_3/OS/macOS/macOSLog.cpp
+    ../The-Forge/Common_3/OS/macOS/macOSThread.cpp
+)
 
+if (APPLE_PLATFORM MATCHES ON)
     source_group(OS\\macOS FILES ${OS_MACOS_FILES})
 
     set(OS_PLATFORM_SPECIFIC_FILES ${OS_MACOS_FILES})
@@ -42,17 +42,17 @@ if (APPLE_PLATFORM MATCHES ON)
     set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()
 
-if (WINDOWS_PLATFORM MATCHES ON)
-    set(OS_WINDOWS_FILES
-        ../The-Forge/Common_3/OS/Windows/WindowsBase.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsFileSystem.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsLog.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.h
-        ../The-Forge/Common_3/OS/Windows/WindowsThread.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsTime.cpp
-    )
+set(OS_WINDOWS_FILES
+    ../The-Forge/Common_3/OS/Windows/WindowsBase.cpp
+    ../The-Forge/Common_3/OS/Windows/WindowsFileSystem.cpp
+    ../The-Forge/Common_3/OS/Windows/WindowsLog.cpp
+    ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.cpp
+    ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.h
+    ../The-Forge/Common_3/OS/Windows/WindowsThread.cpp
+    ../The-Forge/Common_3/OS/Windows/WindowsTime.cpp
+)
 
+if (WINDOWS_PLATFORM MATCHES ON)
     source_group(OS\\Windows FILES ${OS_WINDOWS_FILES})
 
     set(OS_PLATFORM_SPECIFIC_FILES ${OS_WINDOWS_FILES})
@@ -64,6 +64,7 @@ if (WINDOWS_PLATFORM MATCHES ON)
         ../The-Forge/Common_3/Renderer/Vulkan/VulkanShaderReflection.cpp
     )
 endif()
+
 source_group(Renderer FILES ${RENDERER_FILES})
 
 source_group(Logging FILES ${LOGGING_FILES})
@@ -94,6 +95,7 @@ add_library(The-Forge STATIC
     ${OS_CORE_FILES}
     ${MIDDLEWARE_ECS_FILES}
     ${MIDDLEWARE_UI_FILES}
+    ${RMEM_FILES}
 )
 
 set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)

@@ -17,6 +17,9 @@ set(GLOBAL_LIBRARIES "")
 set(GLOBAL_INCLUDES "")
 set(GLOBAL_DEFINES "")
 
+set(THE_FORGE_INCLUDE_DIRS "" CACHE PATH "The Forge's include directories.")
+set(THE_FORGE_LIBRARIES "" CACHE PATH "The Forge's libraries.")
+
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     message("Apple platform detected. Generating macOS and iOS targets.")
 
@@ -67,6 +70,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
         "VULKAN"
+        "_WINDOWS"
     )
 
     find_package(Vulkan REQUIRED)

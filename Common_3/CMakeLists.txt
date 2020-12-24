@@ -15,6 +15,12 @@ set(OS_INTERFACES_FILES
     ../The-Forge/Common_3/OS/Interfaces/ITime.h
 )
 
+set(RMEM_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/rmem/src/rmem_get_module_info.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/rmem/src/rmem_hook.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/rmem/src/rmem_lib.cpp
+)
+
 set(OS_INPUT_FILES
     ../The-Forge/Common_3/OS/Input/InputSystem.cpp
 )
