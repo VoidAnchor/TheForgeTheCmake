@@ -26,26 +26,26 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(APPLE_PLATFORM ON)
 
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-        "METAL"
-    )
+            "METAL"
+            )
 
     find_library(APPLE_APPKIT AppKit)
-	find_library(APPLE_QUARTZCORE QuartzCore)
+    find_library(APPLE_QUARTZCORE QuartzCore)
     find_library(APPLE_METAL Metal)
     find_library(APPLE_METALKIT MetalKit)
     find_library(APPLE_METALPS MetalPerformanceShaders)
 
     set(RENDER_LIBRARIES    ${RENDER_LIBRARIES}
-        ${APPLE_QUARTZCORE}
-        ${APPLE_METAL}
-        ${APPLE_METALKIT}
-        ${MetalPerformanceShaders}
-    )
+            ${APPLE_QUARTZCORE}
+            ${APPLE_METAL}
+            ${APPLE_METALKIT}
+            ${MetalPerformanceShaders}
+            )
 
     set(GLOBAL_LIBRARIES    ${GLOBAL_LIBRARIES}
-        ${APPLE_APPKIT}
-    )
-    
+            ${APPLE_APPKIT}
+            )
+
     set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()
 
@@ -54,8 +54,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     set(${LINUX} ON)
 
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-        "VULKAN"
-    )
+            "VULKAN"
+            )
 
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES "True")
@@ -66,12 +66,12 @@ endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message("Windows detected. Generating Windows targets.")
-    set(${WINDOWS} ON)
+    set(WINDOWS ON)
 
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-        "VULKAN"
-        "_WINDOWS"
-    )
+            "VULKAN"
+            "_WINDOWS"
+            )
 
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES TRUE)
@@ -83,7 +83,7 @@ endif()
 add_subdirectory(The-Forge/Common_3/ThirdParty/OpenSource/gainput/)
 
 set(GLOBAL_LIBRARIES ${GLOBAL_LIBRARIES}
-    gainputstatic
-)
+        gainputstatic
+        )
 
 add_subdirectory(Common_3)
