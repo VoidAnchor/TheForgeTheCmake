@@ -96,6 +96,7 @@ add_library(The-Forge STATIC
         ${MIDDLEWARE_ECS_FILES}
         ${MIDDLEWARE_UI_FILES}
         ${RMEM_FILES}
+        ${GAINPUT_STATIC_FILES}
         )
 
 set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)

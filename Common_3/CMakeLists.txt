@@ -132,4 +132,32 @@ set(MIDDLEWARE_UI_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui.h
 )
 
+set(GAINPUT_STATIC_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gainput.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputAllocator.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputButtonStickGesture.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/dev/GainputDev.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputDoubleClickGesture.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputHoldGesture.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputInputDeltaState.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputInputDevice.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/builtin/GainputInputDeviceBuiltIn.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/keyboard/GainputInputDeviceKeyboard.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/mouse/GainputInputDeviceMouse.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/pad/GainputInputDevicePad.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/touch/GainputInputDeviceTouch.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputInputManager.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputInputMap.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/recorder/GainputInputPlayer.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/recorder/GainputInputRecorder.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/recorder/GainputInputRecording.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputInputState.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputMapFilters.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/dev/GainputMemoryStream.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputPinchGesture.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputRotateGesture.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputSimultaneouslyDownGesture.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputTapGesture.cpp
+)
+
 include(TheForge.cmake)
