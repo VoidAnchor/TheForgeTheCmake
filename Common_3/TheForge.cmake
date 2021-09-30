@@ -107,8 +107,10 @@ add_library(OS STATIC
         ${OS_SCRIPTING_FILES}
         ${OS_UI_FILES}
         ${OS_UI_SHADER_FILES}
-        ${MIDDLEWARE_ECS_FILES}
-        ${MIDDLEWARE_UI_FILES}
+)
+
+add_library(Renderer STATIC
+        ${RENDERER_FILES}
 )
 
 set_property(TARGET OS PROPERTY CXX_STANDARD 17)
