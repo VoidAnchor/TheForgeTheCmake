@@ -81,7 +81,7 @@ set(OS_MIDDLEWARE_FILES
     ../The-Forge/Middleware_3/Animation/ClipController.h
     ../The-Forge/Middleware_3/Animation/ClipMask.cpp
     ../The-Forge/Middleware_3/Animation/ClipMask.h
-    ../The-Forge/Middelware_3/Animation/Rig.cpp
+    ../The-Forge/Middleware_3/Animation/Rig.cpp
     ../The-Forge/Middleware_3/Animation/Rig.h
     ../The-Forge/Middleware_3/Animation/SkeletonBatcher.cpp
     ../The-Forge/Middleware_3/Animation/SkeletonBatcher.h
@@ -94,28 +94,28 @@ set(OS_MIDDLEWARE_PANINI_SHADER_FILES
 )
 
 set(OS_PROFILER_FILES
-    ../The-Forge/Common_3/Profiler/GpuProfiler.cpp
-    ../The-Forge/Common_3/Profiler/GpuProfiler.h
-    ../The-Forge/Common_3/Profiler/ProfilerBase.cpp
-    ../The-Forge/Common_3/Profiler/ProfilerBase.h
-    ../The-Forge/Common_3/Profiler/ProfilerHTML.h
+    ../The-Forge/Common_3/OS/Profiler/GpuProfiler.cpp
+    ../The-Forge/Common_3/OS/Profiler/GpuProfiler.h
+    ../The-Forge/Common_3/OS/Profiler/ProfilerBase.cpp
+    ../The-Forge/Common_3/OS/Profiler/ProfilerBase.h
+    ../The-Forge/Common_3/OS/Profiler/ProfilerHTML.h
 )
 
 set(OS_SCRIPTING_FILES
-    ../The-Forge/Common_3/Scripting/LuaManager.cpp
-    ../The-Forge/Common_3/Scripting/LuaManagerImpl.cpp
-    ../The-Forge/Common_3/Scripting/LuaSystem.cpp
+    ../The-Forge/Common_3/OS/Scripting/LuaManager.cpp
+    ../The-Forge/Common_3/OS/Scripting/LuaManagerImpl.cpp
+    ../The-Forge/Common_3/OS/Scripting/LuaSystem.cpp
 )
 
 set(OS_UI_FILES
-    ../The-Forge/Common_3/UI/UI.cpp
+    ../The-Forge/Common_3/OS/UI/UI.cpp
 )
 
 set(OS_UI_SHADER_FILES
-    ../The-Forge/Common_3/UI/Shaders/FSL/imgui.frag.fsl
-    ../The-Forge/Common_3/UI/Shaders/FSL/imgui.verg.fsl
-    ../The-Forge/Common_3/UI/Shaders/FSL/textured_mesh.frag.fsl
-    ../The-Forge/Common_3/UI/Shaders/FSL/textured_mesh.vert.fsl
+    ../The-Forge/Common_3/OS/UI/Shaders/FSL/imgui.frag.fsl
+    ../The-Forge/Common_3/OS/UI/Shaders/FSL/imgui.vert.fsl
+    ../The-Forge/Common_3/OS/UI/Shaders/FSL/textured_mesh.frag.fsl
+    ../The-Forge/Common_3/OS/UI/Shaders/FSL/textured_mesh.vert.fsl
 )
 
 set(OS_WINDOWS_FILES
