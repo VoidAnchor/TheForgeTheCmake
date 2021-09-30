@@ -2,17 +2,31 @@ project(The-Forge)
 
 set(OS_PLATFORM_SPECIFIC_FILES "")
 
-source_group(OS\\Interfaces FILES ${OS_INTERFACES_FILES})
+source_group(OS\\Camera FILES ${OS_CAMERA_FILES})
 
-source_group(OS\\Input FILES ${OS_INPUT_FILES})
+source_group(OS\\Core FILES ${OS_CORE_FILES})
 
 source_group(OS\\FileSystem FILES ${OS_FILESYSTEM_FILES})
 
-source_group(OS\\MemoryManager FILES ${OS_MEMORYMANAGER_FILES})
+source_group(OS\\Fonts FILES ${OS_FONT_FILES} ${OS_FONT_SHADER_FILES})
 
-source_group(OS\\Camera FILES ${OS_CAMERA_FILES})
+source_group(OS\\Input FILES ${OS_INPUT_FILES})
+
+source_group(OS\\Interfaces FILES ${OS_INTERFACES_FILES})
+
+source_group(OS\\Logging FILES ${OS_LOGGING_FILES})
 
 source_group(OS\\Math FILES ${OS_MATH_FILES})
+
+source_group(OS\\MemoryTracking FILES ${OS_MEMORYTRACKING_FILES})
+
+source_group(OS\\Middleware FILES ${OS_MIDDLEWARE_FILES} ${OS_MIDDLEWARE_PANINI_SHADER_FILES})
+
+source_group(OS\\Profiler FILES ${OS_PROFILER_FILES})
+
+source_group(OS\\Scripting FILES ${OS_SCRIPTING_FILES})
+
+source_group(OS\\UI FILES ${OS_UI_FILES} ${OS_UI_SHADER_FILES})
 
 set(OS_IMAGE_FILES
         ../The-Forge/Common_3/ThirdParty/OpenSource/basis_universal/transcoder/basisu_transcoder.cpp
@@ -42,16 +56,6 @@ if (APPLE_PLATFORM MATCHES ON)
     set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()
 
-set(OS_WINDOWS_FILES
-        ../The-Forge/Common_3/OS/Windows/WindowsBase.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsFileSystem.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsLog.c
-        ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.h
-        ../The-Forge/Common_3/OS/Windows/WindowsThread.c
-        ../The-Forge/Common_3/OS/Windows/WindowsTime.c
-        )
-
 if (WINDOWS MATCHES ON)
     source_group(OS\\Windows FILES ${OS_WINDOWS_FILES})
 
@@ -80,19 +84,19 @@ source_group(Middleware_3\\ECS FILES ${MIDDLEWARE_ECS_FILES})
 source_group(Middleware_3\\UI FILES ${MIDDLEWARE_UI_FILES})
 
 add_library(The-Forge STATIC
-        ${OS_INTERFACES_FILES}
-        ${OS_INPUT_FILES}
-        ${OS_FILESYSTEM_FILES}
-        ${OS_MEMORYMANAGER_FILES}
         ${OS_CAMERA_FILES}
-        ${OS_MATH_FILES}
-        ${OS_IMAGE_FILES}
-        ${OS_PLATFORM_SPECIFIC_FILES}
-        ${RENDERER_FILES}
-        ${THIRDPARTY_OSS_EASTL_FILES}
-        ${THIRDPARTY_OSS_TINYEXR_FILES}
-        ${LOGGING_FILES}
         ${OS_CORE_FILES}
+        ${OS_FILESYSTEM_FILES}
+        ${OS_FONT_FILES}
+        ${OS_INPUT_FILES}
+        ${OS_INTERFACES_FILES}
+        ${OS_LOGGING_FILES}
+        ${OS_MATH_FILES}
+        ${OS_MEMORYTRACKING_FILES}
+        ${OS_MIDDLEWARE_FILES}
+        ${OS_PROFILER_FILES}
+        ${OS_SCRIPTING_FILES}
+        ${OS_UI_FILES}
         ${MIDDLEWARE_ECS_FILES}
         ${MIDDLEWARE_UI_FILES}
         ${RMEM_FILES}
