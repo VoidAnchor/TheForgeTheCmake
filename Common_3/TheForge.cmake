@@ -45,11 +45,11 @@ endif()
 set(OS_WINDOWS_FILES
         ../The-Forge/Common_3/OS/Windows/WindowsBase.cpp
         ../The-Forge/Common_3/OS/Windows/WindowsFileSystem.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsLog.cpp
+        ../The-Forge/Common_3/OS/Windows/WindowsLog.c
         ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.cpp
         ../The-Forge/Common_3/OS/Windows/WindowsStackTraceDump.h
-        ../The-Forge/Common_3/OS/Windows/WindowsThread.cpp
-        ../The-Forge/Common_3/OS/Windows/WindowsTime.cpp
+        ../The-Forge/Common_3/OS/Windows/WindowsThread.c
+        ../The-Forge/Common_3/OS/Windows/WindowsTime.c
         )
 
 if (WINDOWS MATCHES ON)

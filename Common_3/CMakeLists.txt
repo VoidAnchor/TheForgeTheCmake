@@ -38,11 +38,11 @@ set(OS_CORE_FILES
     ../The-Forge/Common_3/OS/Core/Screenshot.cpp
     ../The-Forge/Common_3/OS/Core/ThreadSystem.cpp
     ../The-Forge/Common_3/OS/Core/ThreadSystem.h
-    ../The-Forge/Common_3/OS/Core/Timer.cpp
+    ../The-Forge/Common_3/OS/Core/Timer.c
 )
 
 set(OS_MEMORYMANAGER_FILES
-    ../The-Forge/Common_3/OS/MemoryTracking/MemoryTracking.cpp
+    ../The-Forge/Common_3/OS/MemoryTracking/MemoryTracking.c
 )
 
 set(OS_CAMERA_FILES
@@ -65,7 +65,7 @@ set(RENDERER_FILES
 )
 
 set(LOGGING_FILES
-    ../The-Forge/Common_3/OS/Logging/Log.cpp
+    ../The-Forge/Common_3/OS/Logging/Log.c
     ../The-Forge/Common_3/OS/Logging/Log.h
 )
 
@@ -120,9 +120,9 @@ set(MIDDLEWARE_ECS_FILES
 )
 
 set(MIDDLEWARE_UI_FILES
-    ../The-Forge/Middleware_3/UI/ImguiGUIDriver.cpp
-    ../The-Forge/Middleware_3/UI/AppUI.cpp
-    ../The-Forge/Middleware_3/UI/AppUI.h
+    ../The-Forge/Common_3/OS/UI/imgui_user.cpp
+    ../The-Forge/Common_3/OS/UI/imgui_user.h
+    ../The-Forge/Common_3/OS/UI/UI.cpp
     ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imconfig.h
     ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_demo.cpp
     ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_draw.cpp
