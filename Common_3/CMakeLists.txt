@@ -132,6 +132,102 @@ set(OS_UTILS_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/EASTL.natvis
 )
 
+set(BASISU_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/basis_universal/transcoder/basisu_transcoder.cpp
+)
+
+set(EASTL_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/assert.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/allocator_forge.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/fixed_pool.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/hashtable.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/intrusive_list.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/numeric_limits.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/red_black_tree.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/string.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/thread_support.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/EAStdC/EAMemory.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/EAStdC/EASprintf.cpp
+)
+
+set(IMGUI_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imconfig.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_demo.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_draw.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_internal.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_widgets.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui.h
+)
+
+set(LUA_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lapi.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lauxlib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lbaselib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lbitlib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lcode.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lcorolib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lctype.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/ldblib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/ldebug.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/ldo.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/ldump.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lfunc.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lgc.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/linit.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/liolib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/llex.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lmathlib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lmem.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/loadlib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lobject.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lopcodes.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/loslib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lparser.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lstate.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lstring.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lstrlib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/ltable.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/ltablib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/ltm.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lundump.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lutf8lib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lvm.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/lua-5.3.5/src/lzio.c
+)
+
+set(MINIZIP_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/aes.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/aescrypt.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/aeskey.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/aesopt.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/aestab.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/aestab.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/brg_endian.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/brg_types.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/hmac.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/hmac.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/sha1.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/sha1.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/sha2.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/lib/brg/sha2.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/zip/miniz.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_crypt.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_crypt.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_crypt_brg.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_os.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_os.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_strm.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_strm_raw.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_strm_wzaes.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_strm_wzaes.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_strm_zlib.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_strm_zlib.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_zip.c
+    ../The-Forge/Common_3/ThirdParty/OpenSource/minizip/mz_zip.h
+)
+
 set(RMEM_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/rmem/src/rmem_get_module_info.cpp
     ../The-Forge/Common_3/ThirdParty/OpenSource/rmem/src/rmem_hook.cpp
@@ -147,20 +243,6 @@ set(RENDERER_FILES
     ../The-Forge/Common_3/Renderer/ResourceLoader.cpp
     ../The-Forge/Common_3/ThirdParty/OpenSource/ags/AgsHelper.h
     ../The-Forge/Common_3/ThirdParty/OpenSource/nvapi/NvApiHelper.h
-)
-
-set(THIRDPARTY_OSS_EASTL_FILES
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/assert.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/allocator_forge.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/fixed_pool.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/hashtable.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/intrusive_list.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/numeric_limits.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/red_black_tree.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/string.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/thread_support.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/EAStdC/EAMemory.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/EAStdC/EASprintf.cpp
 )
 
 set(THIRDPARTY_OSS_TINYEXR_FILES
@@ -180,16 +262,6 @@ set(MIDDLEWARE_ECS_FILES
     ../The-Forge/Middleware_3/ECS/ComponentRepresentation.h
     ../The-Forge/Middleware_3/ECS/EntityManager.cpp
     ../The-Forge/Middleware_3/ECS/EntityManager.h
-)
-
-set(IMGUI_FILES
-    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imconfig.h
-    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_demo.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_draw.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_internal.h
-    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui_widgets.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui.cpp
-    ../The-Forge/Common_3/ThirdParty/OpenSource/imgui/imgui.h
 )
 
 set(GAINPUT_STATIC_FILES

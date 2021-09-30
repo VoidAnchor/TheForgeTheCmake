@@ -31,12 +31,6 @@ source_group(OS\\Scripting FILES ${OS_SCRIPTING_FILES})
 source_group(OS\\UI FILES ${OS_UI_FILES})
 source_group(OS\\UI\\Shaders FILES ${OS_UI_SHADER_FILES})
 
-set(OS_IMAGE_FILES
-        ../The-Forge/Common_3/ThirdParty/OpenSource/basis_universal/transcoder/basisu_transcoder.cpp
-        )
-
-source_group(OS\\Image FILES ${OS_IMAGE_FILES})
-
 set(OS_MACOS_FILES
         ../The-Forge/Common_3/OS/macOS/macOSBase.mm
         ../The-Forge/Common_3/OS/macOS/macOSFileSystem.mm
@@ -87,6 +81,11 @@ source_group(Middleware_3\\ECS FILES ${MIDDLEWARE_ECS_FILES})
 source_group(Middleware_3\\UI FILES ${MIDDLEWARE_UI_FILES})
 
 add_library(The-Forge-Dependencies STATIC
+        ${BASISU_FILES}
+        ${EASTL_FILES}
+        ${IMGUI_FILES}
+        ${LUA_FILES}
+        ${MINIZIP_FILES}
         ${RMEM_FILES}
         ${GAINPUT_STATIC_FILES}
 )
