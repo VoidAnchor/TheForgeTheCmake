@@ -132,6 +132,8 @@ set(OS_UTILS_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/EASTL.natvis
 )
 
+# Dependencies
+
 set(BASISU_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/basis_universal/transcoder/basisu_transcoder.cpp
 )
@@ -234,15 +236,54 @@ set(RMEM_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/rmem/src/rmem_lib.cpp
 )
 
-set(RENDERER_FILES
-    ../The-Forge/Common_3/Renderer/IRay.h
-    ../The-Forge/Common_3/Renderer/CommonShaderReflection.cpp
-    ../The-Forge/Common_3/Renderer/IRenderer.h
-    ../The-Forge/Common_3/Renderer/IShaderReflection.h
-    ../The-Forge/Common_3/Renderer/IResourceLoader.h
+# Renderers
+
+set(RENDERER_SOURCE_FILES
     ../The-Forge/Common_3/Renderer/ResourceLoader.cpp
+    ../The-Forge/Common_3/Renderer/Renderer.cpp
+    ../The-Forge/Common_3/Renderer/CommonShaderReflection.cpp
+)
+
+set(RENDERER_INCLUDE_FILES
+    ../The-Forge/Common_3/Renderer/AgsHelper.h
+    ../The-Forge/Common_3/Renderer/IRay.h
+    ../The-Forge/Common_3/Renderer/IRenderer.h
+    ../The-Forge/Common_3/Renderer/IResourceLoader.h
+    ../The-Forge/Common_3/Renderer/IShaderReflection.h
+)
+
+set(AGS_INCLUDE_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/ags/AgsHelper.h
+)
+
+set(NVAPI_INCLUDE_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/nvapi/NvApiHelper.h
+)
+
+set(DX11_FILES
+    ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11.cpp
+    ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11CapBuilder.h
+    ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11Commands.h
+    ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11Raytracing.cpp
+    ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11ShaderReflection.cpp
+)
+
+set(DX12_FILES
+    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12.cpp
+    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12CapBuilder.h
+    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12Hooks.cpp
+    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12Hooks.h
+    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12MemoryAllocator.h
+    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12Raytracing.cpp
+    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12ShaderReflection.cpp
+)
+
+set(VULKAN_FILES
+    ../The-Forge/Common_3/Renderer/Vulkan/Vulkan.cpp
+    ../The-Forge/Common_3/Renderer/Vulkan/VulkanCapsBuilder.h
+    ../The-Forge/Common_3/Renderer/Vulkan/VulkanMemoryAllocator.h
+    ../The-Forge/Common_3/Renderer/Vulkan/VulkanRaytracing.cpp
+    ../The-Forge/Common_3/Renderer/Vulkan/VulkanShaderReflection.cpp
 )
 
 set(THIRDPARTY_OSS_TINYEXR_FILES
