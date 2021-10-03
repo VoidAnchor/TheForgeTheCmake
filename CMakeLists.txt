@@ -71,6 +71,32 @@ if(${WINDOWS} MATCHES ON)
     )
 endif()
 
+set(API_SELECTED ON)
+
+if(${VULKAN} MATCHES OFF)
+    if(${DX11} MATCHES OFF)
+        if(${DX12} MATCHES OFF)
+            if(${METAL} MATCHES OFF)
+                set(API_SELECTED OFF)
+            endif()
+        endif()
+    endif()
+endif()
+
+if (${API_SELECTED} MATCHES OFF)
+    if(${APPLE_PLATFORM} MATCHES ON)
+        set(METAL ON)
+    endif()
+
+    if(${LINUX} MATCHES ON)
+        set(VULKAN ON)
+    endif()
+
+    if(${WINDOWS} MATCHES ON)
+        set(DX12 ON)
+    endif()
+endif()
+
 if(${VULKAN} MATCHES ON)
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES TRUE)
@@ -92,7 +118,7 @@ if(${METAL} MATCHES ON)
         ${APPLE_METALKIT}
         ${MetalPerformanceShaders}
     )
-    
+
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
         "METAL"
     )
