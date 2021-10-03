@@ -128,6 +128,13 @@ set(OS_WINDOWS_FILES
     ../The-Forge/Common_3/OS/Windows/WindowsTime.c
 )
 
+set(OS_MACOS_FILES
+    ../The-Forge/Common_3/OS/macOS/macOSBase.mm
+    ../The-Forge/Common_3/OS/macOS/macOSFileSystem.mm
+    ../The-Forge/Common_3/OS/macOS/macOSLog.cpp
+    ../The-Forge/Common_3/OS/macOS/macOSThread.cpp
+)
+
 set(OS_UTILS_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/EASTL/EASTL.natvis
 )
@@ -245,7 +252,6 @@ set(RENDERER_SOURCE_FILES
 )
 
 set(RENDERER_INCLUDE_FILES
-    ../The-Forge/Common_3/Renderer/AgsHelper.h
     ../The-Forge/Common_3/Renderer/IRay.h
     ../The-Forge/Common_3/Renderer/IRenderer.h
     ../The-Forge/Common_3/Renderer/IResourceLoader.h
@@ -258,6 +264,13 @@ set(AGS_INCLUDE_FILES
 
 set(NVAPI_INCLUDE_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/nvapi/NvApiHelper.h
+)
+
+set(METAL_FILES
+    ../The-Forge/Common_3/Renderer/Metal/MetalRaytracing.mm
+    ../The-Forge/Common_3/Renderer/Metal/MetalMemoryAllocator.h
+    ../The-Forge/Common_3/Renderer/Metal/MetalRenderer.mm
+    ../The-Forge/Common_3/Renderer/Metal/MetalShaderReflection.mm
 )
 
 set(DX11_FILES
@@ -273,7 +286,7 @@ set(DX12_FILES
     ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12CapBuilder.h
     ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12Hooks.cpp
     ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12Hooks.h
-    ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12MemoryAllocator.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/D3D12MemoryAllocator/Direct3D12MemoryAllocator.h
     ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12Raytracing.cpp
     ../The-Forge/Common_3/Renderer/Direct3D12/Direct3D12ShaderReflection.cpp
 )
@@ -289,11 +302,6 @@ set(VULKAN_FILES
 set(THIRDPARTY_OSS_TINYEXR_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/TinyEXR/tinyexr.cpp
     ../The-Forge/Common_3/ThirdParty/OpenSource/TinyEXR/tinyexr.h
-)
-
-set(MIDDLEWARE_TEXT_FILES
-    ../The-Forge/Middleware_3/Text/Fontstash.cpp
-    ../The-Forge/Middleware_3/Text/Fontstash.h
 )
 
 set(MIDDLEWARE_ECS_FILES
@@ -333,4 +341,5 @@ set(GAINPUT_STATIC_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputTapGesture.cpp
 )
 
-include(TheForge.cmake)
+include(OS.cmake)
+include(Renderer.cmake)
