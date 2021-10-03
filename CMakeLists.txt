@@ -5,6 +5,9 @@ project(The-Forge-Workspace)
 set(APPLE_PLATFORM OFF)
 set(LINUX OFF)
 set(WINDOWS OFF)
+set(METAL OFF)
+set(DX12 OFF)
+set(DX11 OFF)
 set(VULKAN OFF)
 
 set(ASSIMP OFF)
@@ -24,10 +27,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     message("Apple platform detected. Generating macOS and iOS targets.")
 
     set(APPLE_PLATFORM ON)
-
-    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-            "METAL"
-            )
+    set(METAL ON)
 
     find_library(APPLE_APPKIT AppKit)
     find_library(APPLE_QUARTZCORE QuartzCore)
@@ -35,27 +35,26 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     find_library(APPLE_METALKIT MetalKit)
     find_library(APPLE_METALPS MetalPerformanceShaders)
 
-    set(RENDER_LIBRARIES    ${RENDER_LIBRARIES}
-            ${APPLE_QUARTZCORE}
-            ${APPLE_METAL}
-            ${APPLE_METALKIT}
-            ${MetalPerformanceShaders}
-            )
+    set(RENDER_LIBRARIES
+        ${RENDER_LIBRARIES}
+        ${APPLE_QUARTZCORE}
+        ${APPLE_METAL}
+        ${APPLE_METALKIT}
+        ${MetalPerformanceShaders}
+    )
 
-    set(GLOBAL_LIBRARIES    ${GLOBAL_LIBRARIES}
-            ${APPLE_APPKIT}
-            )
+    set(GLOBAL_LIBRARIES
+        ${GLOBAL_LIBRARIES}
+        ${APPLE_APPKIT}
+    )
 
     set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     message("Linux detected. Generating Linux targets.")
-    set(${LINUX} ON)
-
-    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-            "VULKAN"
-            )
+    set(LINUX ON)
+    set(VULKAN ON)
 
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES "True")
@@ -67,17 +66,46 @@ endif()
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message("Windows detected. Generating Windows targets.")
     set(WINDOWS ON)
-
-    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-            "VULKAN"
-            "_WINDOWS"
-            )
+    set(VULKAN ON)
+    set(DX11 ON)
+    set(DX12 ON)
 
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES TRUE)
         set(RENDER_LIBRARIES ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
         set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
     endif()
+endif()
+
+# Gather the switches, set up our required defines.
+if(${WINDOWS} MATCHES ON)
+    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+        "_WINDOWS"
+    )
+endif()
+
+if(${VULKAN} MATCHES ON)
+    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+        "VULKAN"
+    )
+endif()
+
+if(${METAL} MATCHES ON)
+    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+        "METAL"
+    )
+endif()
+
+if(${DX11} MATCHES ON)
+    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+        "DIRECT3D11"
+    )
+endif()
+
+if(${DX12} MATCHES ON)
+    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+        "DIRECT3D12"
+    )
 endif()
 
 add_subdirectory(The-Forge/Common_3/ThirdParty/OpenSource/gainput/)
