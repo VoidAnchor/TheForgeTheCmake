@@ -342,4 +342,4 @@ set(GAINPUT_STATIC_FILES
 )
 
 include(OS.cmake)
-include(Renderer.cmake)
+include(Renderer/Renderer.cmake)

@@ -1,4 +1,6 @@
 
+set(RENDER_LINK_LIBS "")
+
 if(${METAL} MATCHES ON)
     set(RENDERER_FILES ${RENDERER_FILES} ${METAL_FILES})
 endif()
@@ -24,3 +26,5 @@ add_library(Renderer STATIC
     ${RENDERER_INCLUDE_FILES}
     ${RENDERER_FILES}
 )
+
+target_link_libraries(Renderer PUBLIC ${RENDER_LIBRARIES})

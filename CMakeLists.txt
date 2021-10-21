@@ -23,6 +23,9 @@ set(GLOBAL_LIBRARIES "")
 set(GLOBAL_INCLUDES "")
 set(GLOBAL_DEFINES "")
 
+set(PLATFORM_STATIC_EXT "")
+set(PLATFORM_DYNAMIC_EXT "")
+
 set(THE_FORGE_INCLUDE_DIRS "" CACHE PATH "The Forge's include directories.")
 set(THE_FORGE_LIBRARIES "" CACHE PATH "The Forge's libraries.")
 
@@ -45,6 +48,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     )
 
     set(CMAKE_CXX_FLAGS "-x objective-c++")
+    set(PLATFORM_STATIC_EXT ".a")
+    set(PLATFORM_DYNAMIC_EXT ".dylib")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -57,11 +62,23 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
         set(VULKAN ON)
     endif()
+    
+    set(PLATFORM_STATIC_EXT ".a")
+    set(PLATFORM_DYNAMIC_EXT ".so")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message("Windows detected. Generating Windows targets.")
     set(WINDOWS ON)
+
+    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
+        "WinPixEventRuntime.lib"
+        "amd_ags_x64.lib"
+        "nvapi64.lib"
+    )
+    
+    set(PLATFORM_STATIC_EXT ".lib")
+    set(PLATFORM_DYNAMIC_EXT ".dll")
 endif()
 
 # Gather the switches, set up our required defines.
@@ -128,18 +145,20 @@ if(${DX11} MATCHES ON)
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
         "DIRECT3D11"
     )
+
+    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
+        "dxcompiler.lib"
+    )
 endif()
 
 if(${DX12} MATCHES ON)
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
         "DIRECT3D12"
     )
+    
+    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
+        "dxcompiler.lib"
+    )
 endif()
-
-add_subdirectory(The-Forge/Common_3/ThirdParty/OpenSource/gainput/)
-
-set(GLOBAL_LIBRARIES ${GLOBAL_LIBRARIES}
-    gainputstatic
-)
 
 add_subdirectory(Common_3)
