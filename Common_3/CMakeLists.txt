@@ -294,7 +294,7 @@ set(DX12_FILES
 set(VULKAN_FILES
     ../The-Forge/Common_3/Renderer/Vulkan/Vulkan.cpp
     ../The-Forge/Common_3/Renderer/Vulkan/VulkanCapsBuilder.h
-    ../The-Forge/Common_3/Renderer/Vulkan/VulkanMemoryAllocator.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/VulkanMemoryAllocator/VulkanMemoryAllocator.h
     ../The-Forge/Common_3/Renderer/Vulkan/VulkanRaytracing.cpp
     ../The-Forge/Common_3/Renderer/Vulkan/VulkanShaderReflection.cpp
 )
