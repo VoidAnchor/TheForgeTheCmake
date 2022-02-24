@@ -224,3 +224,4 @@ endif()
 message("\n")
 
 add_subdirectory(Common_3)
+add_subdirectory(Examples_3)
