@@ -36,8 +36,6 @@ if (APPLE_PLATFORM MATCHES ON)
 
     set(OS_PLATFORM_SPECIFIC_FILES ${OS_MACOS_FILES} ${OS_DARWIN_FILES})
 
-    message(${OS_PLATFORM_SPECIFIC_FILES})
-
     set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()
 
@@ -57,31 +55,5 @@ add_library(The-Forge-Dependencies STATIC
         ${GAINPUT_STATIC_FILES}
 )
 
-add_library(OS STATIC
-        ${OS_CAMERA_FILES}
-        ${OS_CORE_FILES}
-        ${OS_FILESYSTEM_FILES}
-        ${OS_FONT_FILES}
-        ${OS_FONT_SHADER_FILES}
-        ${OS_INPUT_FILES}
-        ${OS_INTERFACES_FILES}
-        ${OS_LOGGING_FILES}
-        ${OS_MATH_FILES}
-        ${OS_MEMORYTRACKING_FILES}
-        ${OS_MIDDLEWARE_FILES}
-        ${OS_MIDDLEWARE_PANINI_SHADER_FILES}
-        ${OS_PROFILER_FILES}
-        ${OS_SCRIPTING_FILES}
-        ${OS_UI_FILES}
-        ${OS_UI_SHADER_FILES}
-)
+set_property(TARGET The-Forge-Dependencies PROPERTY CXX_STANDARD 17)
 
-set_property(TARGET OS PROPERTY CXX_STANDARD 17)
-
-target_link_libraries(OS The-Forge-Dependencies ${GLOBAL_LIBRARIES})
-
-target_compile_definitions(OS PUBLIC ${GLOBAL_DEFINES})
-
-if (${APPLE_PLATFORM} MATCHES ON)
-    set_property (TARGET OS APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
-endif()

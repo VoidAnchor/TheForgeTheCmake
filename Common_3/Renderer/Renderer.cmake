@@ -20,11 +20,3 @@ endif()
 if(${WINDOWS} MATCHES ON)
     set(RENDERER_FILES ${RENDERER_FILES} ${NVAPI_INCLUDE_FILES})
 endif()
-
-add_library(Renderer STATIC
-    ${RENDERER_SOURCE_FILES}
-    ${RENDERER_INCLUDE_FILES}
-    ${RENDERER_FILES}
-)
-
-target_link_libraries(Renderer PUBLIC ${RENDER_LIBRARIES})

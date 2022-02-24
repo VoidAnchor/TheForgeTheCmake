@@ -26,3 +26,4 @@ set(SPIRVTOOLS_SOURCE
 )
 
 add_library(SpirvTools STATIC ${SPIRVTOOLS_SOURCE})
+set_property(TARGET SpirvTools PROPERTY CXX_STANDARD 17)
