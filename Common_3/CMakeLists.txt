@@ -405,6 +405,25 @@ set(OS_MIDDLEWARE_ANIMATION_FILES
     ../The-Forge/Middleware_3/Animation/SkeletonBatcher.cpp
     ../The-Forge/Middleware_3/Animation/SkeletonBatcher.h
 )
+
+set(MESHOPTIMIZER_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/vertexfilter.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/allocator.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/clusterizer.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/indexcodec.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/indexgenerator.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/meshoptimizer.h
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/overdrawanalyzer.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/overdrawoptimizer.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/simplifier.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/spatialorder.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/stripifier.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/vcacheanalyzer.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/vcacheoptimizer.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/vertexcodec.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/vfetchanalyzer.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/meshoptimizer/src/vfetchoptimizer.cpp
+)
  
 include(OS.cmake)
 include(Renderer/Renderer.cmake)
