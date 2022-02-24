@@ -304,10 +304,19 @@ set(NVAPI_INCLUDE_FILES
 )
 
 set(METAL_FILES
-    ../The-Forge/Common_3/Renderer/Metal/MetalRaytracing.mm
+    ../The-Forge/Common_3/Renderer/Metal/MetalAvailabilityMacros.h
+    ../The-Forge/Common_3/Renderer/Metal/MetalCapBuilder.h
+    ../The-Forge/Common_3/Renderer/Metal/MetalConfig.h
     ../The-Forge/Common_3/Renderer/Metal/MetalMemoryAllocator.h
+    ../The-Forge/Common_3/Renderer/Metal/MetalMemoryAllocatorImpl.h
+    ../The-Forge/Common_3/Renderer/Metal/MetalRaytracing.mm
     ../The-Forge/Common_3/Renderer/Metal/MetalRenderer.mm
     ../The-Forge/Common_3/Renderer/Metal/MetalShaderReflection.mm
+)
+
+set(RENDER_QUEST_FILES
+    ../The-Forge/Common_3/Renderer/Quest/VrApiHooks.cpp
+    ../The-Forge/Common_3/Renderer/Quest/VrApiHooks.h
 )
 
 set(DX11_FILES
@@ -331,6 +340,7 @@ set(DX12_FILES
 set(VULKAN_FILES
     ../The-Forge/Common_3/Renderer/Vulkan/Vulkan.cpp
     ../The-Forge/Common_3/Renderer/Vulkan/VulkanCapsBuilder.h
+    ../The-Forge/Common_3/Renderer/Vulkan/VulkanConfig.h
     ../The-Forge/Common_3/ThirdParty/OpenSource/VulkanMemoryAllocator/VulkanMemoryAllocator.h
     ../The-Forge/Common_3/Renderer/Vulkan/VulkanRaytracing.cpp
     ../The-Forge/Common_3/Renderer/Vulkan/VulkanShaderReflection.cpp
