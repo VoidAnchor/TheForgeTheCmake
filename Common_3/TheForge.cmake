@@ -22,7 +22,9 @@ set(FORGE_FILES
         ${OS_SCRIPTING_FILES}
         ${OS_UI_FILES}
         ${OS_UI_SHADER_FILES}
-
+        ${OS_MIDDLEWARE_ANIMATION_FILES}
+        ${OS_MIDDLEWARE_PARALLEL_PRIMS_FILES}
+        ${OS_PLATFORM_SPECIFIC_FILES}
 )
 
 if(${DYNAMIC_LIB} MATCHES OFF)
@@ -39,7 +41,7 @@ endif()
 
 set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
 
-target_link_libraries(The-Forge PUBLIC The-Forge-Dependencies ${GLOBAL_LIBRARIES} ${RENDER_LIBRARIES})
+target_link_libraries(The-Forge PUBLIC The-Forge-Dependencies ozz_animation ${GLOBAL_LIBRARIES} ${RENDER_LIBRARIES})
 
 target_compile_definitions(The-Forge PUBLIC ${GLOBAL_DEFINES})
 

@@ -106,23 +106,6 @@ set(OS_QUEST_FILES
     ../The-Forge/Common_3/OS/Quest/VrApi.h
 )
 
-set(OS_MIDDLEWARE_FILES
-    ../The-Forge/Middleware_3/Animation/AnimatedObject.cpp
-    ../The-Forge/Middleware_3/Animation/AnimatedObject.h
-    ../The-Forge/Middleware_3/Animation/Animation.cpp
-    ../The-Forge/Middleware_3/Animation/Animation.h
-    ../The-Forge/Middleware_3/Animation/Clip.cpp
-    ../The-Forge/Middleware_3/Animation/Clip.h
-    ../The-Forge/Middleware_3/Animation/ClipController.cpp
-    ../The-Forge/Middleware_3/Animation/ClipController.h
-    ../The-Forge/Middleware_3/Animation/ClipMask.cpp
-    ../The-Forge/Middleware_3/Animation/ClipMask.h
-    ../The-Forge/Middleware_3/Animation/Rig.cpp
-    ../The-Forge/Middleware_3/Animation/Rig.h
-    ../The-Forge/Middleware_3/Animation/SkeletonBatcher.cpp
-    ../The-Forge/Middleware_3/Animation/SkeletonBatcher.h
-)
-
 set(OS_MIDDLEWARE_PANINI_SHADER_FILES
     ../The-Forge/Middleware_3/PaniniProjection/Shaders/FSL/panini_projection.frag.fsl
     ../The-Forge/Middleware_3/PaniniProjection/Shaders/FSL/panini_projection.vert.fsl
@@ -164,6 +147,7 @@ set(OS_DARWIN_FILES
     ../The-Forge/Common_3/OS/Darwin/CocoaFileSystem.mm
     ../The-Forge/Common_3/OS/Darwin/DarwinLog.c
     ../The-Forge/Common_3/OS/Darwin/DarwinThread.c
+    ../The-Forge/Common_3/OS/FileSystem/UnixFileSystem.cpp
 )
 
 set(OS_MACOS_FILES 
@@ -398,6 +382,28 @@ set(GAINPUT_MACOS_FILES
  
 set(GAINPUT_IOS_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputIos.mm
+)
+
+set(OS_MIDDLEWARE_PARALLEL_PRIMS_FILES
+    ../The-Forge/Middleware_3/ParallelPrimitives/ParallelPrimitives.cpp
+    ../The-Forge/Middleware_3/ParallelPrimitives/ParallelPrimitives.h
+)
+
+set(OS_MIDDLEWARE_ANIMATION_FILES
+    ../The-Forge/Middleware_3/Animation/AnimatedObject.cpp
+    ../The-Forge/Middleware_3/Animation/AnimatedObject.h
+    ../The-Forge/Middleware_3/Animation/Animation.cpp
+    ../The-Forge/Middleware_3/Animation/Animation.h
+    ../The-Forge/Middleware_3/Animation/Clip.cpp
+    ../The-Forge/Middleware_3/Animation/Clip.h
+    ../The-Forge/Middleware_3/Animation/ClipController.cpp
+    ../The-Forge/Middleware_3/Animation/ClipController.h
+    ../The-Forge/Middleware_3/Animation/ClipMask.cpp
+    ../The-Forge/Middleware_3/Animation/ClipMask.h
+    ../The-Forge/Middleware_3/Animation/Rig.cpp
+    ../The-Forge/Middleware_3/Animation/Rig.h
+    ../The-Forge/Middleware_3/Animation/SkeletonBatcher.cpp
+    ../The-Forge/Middleware_3/Animation/SkeletonBatcher.h
 )
  
 include(OS.cmake)

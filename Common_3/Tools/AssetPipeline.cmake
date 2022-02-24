@@ -1,8 +1,5 @@
 project(AssetPipeline)
 
-include(rmem.cmake)
-include(minizip.cmake)
-
 set (ASSET_PIPELINE_FILES 
     ../../The-Forge/Common_3/OS/Logging/Log.c
     ../../The-Forge/Common_3/OS/Logging/Log.h
