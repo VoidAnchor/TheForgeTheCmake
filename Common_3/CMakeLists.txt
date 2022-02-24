@@ -425,7 +425,7 @@ set(MESHOPTIMIZER_FILES
 include(OS.cmake)
 include(Renderer/Renderer.cmake)
 include(ozz.cmake)
-include(AssetPipeline.cmake)
 include(SpirVTools.cmake) 
 include(TheForge.cmake)
+include(AssetPipeline.cmake)
   
