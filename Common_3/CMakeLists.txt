@@ -3,19 +3,32 @@ add_subdirectory(Tools)
 
 # OS
 
+set(OS_ANDROID_FILES
+    ../The-Forge/Common_3/OS/Android/android_native_app_glue.c
+    ../The-Forge/Common_3/OS/Android/AndroidBase.cpp
+    ../The-Forge/Common_3/OS/Android/AndroidFileSystem.cpp
+    ../The-Forge/Common_3/OS/Android/AndroidLog.c
+    ../The-Forge/Common_3/OS/Android/AndroidThread.c
+    ../The-Forge/Common_3/OS/Android/AndroidTime.c
+)
+
 set(OS_CAMERA_FILES
-../The-Forge/Common_3/OS/Camera/CameraController.cpp
+    ../The-Forge/Common_3/OS/Camera/CameraController.cpp
 )
 
 set(OS_CORE_FILES
     ../The-Forge/Common_3/OS/Core/Atomics.h
-    ../The-Forge/Common_3/OS/Core/Compiler.h
     ../The-Forge/Common_3/OS/Core/GPUConfig.h
     ../The-Forge/Common_3/OS/Core/RingBuffer.h
+    ../The-Forge/Common_3/OS/Core/Config.h
+    ../The-Forge/Common_3/OS/Core/DLL.h
+    ../The-Forge/Common_3/OS/Core/RingBuffer.h
     ../The-Forge/Common_3/OS/Core/Screenshot.cpp
+    ../The-Forge/Common_3/OS/Core/TextureContainers.h
     ../The-Forge/Common_3/OS/Core/ThreadSystem.cpp
     ../The-Forge/Common_3/OS/Core/ThreadSystem.h
     ../The-Forge/Common_3/OS/Core/Timer.c
+    ../The-Forge/Common_3/OS/Core/UnixThreadID.h
 )
 
 set(OS_FILESYSTEM_FILES
@@ -57,6 +70,14 @@ set(OS_INTERFACES_FILES
     ../The-Forge/Common_3/OS/Interfaces/IUI.h
 )
 
+set(OS_LINUX_FILES
+    ../The-Forge/Common_3/OS/Linux/LinuxBase.cpp
+    ../The-Forge/Common_3/OS/Linux/LinuxFileSystem.cpp
+    ../The-Forge/Common_3/OS/Linux/LinuxLog.cpp
+    ../The-Forge/Common_3/OS/Linux/LinuxThread.cpp
+    ../The-Forge/Common_3/OS/Linux/LinuxTime.cpp
+)
+
 set(OS_LOGGING_FILES
     ../The-Forge/Common_3/OS/Logging/Log.c
     ../The-Forge/Common_3/OS/Logging/Log.h
@@ -64,10 +85,25 @@ set(OS_LOGGING_FILES
 
 set(OS_MATH_FILES
     ../The-Forge/Common_3/OS/Math/MathTypes.h
+    ../The-Forge/Common_3/OS/Math/RTree.h
 )
 
 set(OS_MEMORYTRACKING_FILES
     ../The-Forge/Common_3/OS/MemoryTracking/MemoryTracking.c
+    ../The-Forge/Common_3/OS/MemoryTracking/NoMemoryDefines.h
+)
+
+set(OS_PROFILER_FILES
+    ../The-Forge/Common_3/OS/Profiler/GpuProfiler.cpp
+    ../The-Forge/Common_3/OS/Profiler/GpuProfiler.h
+    ../The-Forge/Common_3/OS/Profiler/ProfilerBase.cpp
+    ../The-Forge/Common_3/OS/Profiler/ProfilerBase.h
+    ../The-Forge/Common_3/OS/Profiler/ProfilerHTML.h
+)
+
+set(OS_QUEST_FILES
+    ../The-Forge/Common_3/OS/Quest/VrApi.cpp
+    ../The-Forge/Common_3/OS/Quest/VrApi.h
 )
 
 set(OS_MIDDLEWARE_FILES
@@ -93,18 +129,14 @@ set(OS_MIDDLEWARE_PANINI_SHADER_FILES
     ../The-Forge/Middleware_3/PaniniProjection/Shaders/FSL/resources.h
 )
 
-set(OS_PROFILER_FILES
-    ../The-Forge/Common_3/OS/Profiler/GpuProfiler.cpp
-    ../The-Forge/Common_3/OS/Profiler/GpuProfiler.h
-    ../The-Forge/Common_3/OS/Profiler/ProfilerBase.cpp
-    ../The-Forge/Common_3/OS/Profiler/ProfilerBase.h
-    ../The-Forge/Common_3/OS/Profiler/ProfilerHTML.h
-)
-
 set(OS_SCRIPTING_FILES
     ../The-Forge/Common_3/OS/Scripting/LuaManager.cpp
+    ../The-Forge/Common_3/OS/Scripting/LuaManager.h
+    ../The-Forge/Common_3/OS/Scripting/LuaManagerCommon.h
     ../The-Forge/Common_3/OS/Scripting/LuaManagerImpl.cpp
+    ../The-Forge/Common_3/OS/Scripting/LuaManagerImpl.h
     ../The-Forge/Common_3/OS/Scripting/LuaSystem.cpp
+    ../The-Forge/Common_3/OS/Scripting/LunaV.hpp
 )
 
 set(OS_UI_FILES
@@ -128,11 +160,16 @@ set(OS_WINDOWS_FILES
     ../The-Forge/Common_3/OS/Windows/WindowsTime.c
 )
 
-set(OS_MACOS_FILES
-    ../The-Forge/Common_3/OS/macOS/macOSBase.mm
-    ../The-Forge/Common_3/OS/macOS/macOSFileSystem.mm
-    ../The-Forge/Common_3/OS/macOS/macOSLog.cpp
-    ../The-Forge/Common_3/OS/macOS/macOSThread.cpp
+set(OS_DARWIN_FILES
+    ../The-Forge/Common_3/OS/Darwin/CocoaFileSystem.mm
+    ../The-Forge/Common_3/OS/Darwin/DarwinLog.c
+    ../The-Forge/Common_3/OS/Darwin/DarwinThread.c
+)
+
+set(OS_MACOS_FILES 
+    ../The-Forge/Common_3/OS/Darwin/macOSBase.mm
+    ../The-Forge/Common_3/OS/Darwin/macOSAppDelegate.m
+    ../The-Forge/Common_3/OS/Darwin/macOSAppDelegate.h
 )
 
 set(OS_UTILS_FILES

@@ -34,7 +34,9 @@ source_group(OS\\UI\\Shaders FILES ${OS_UI_SHADER_FILES})
 if (APPLE_PLATFORM MATCHES ON)
     source_group(OS\\macOS FILES ${OS_MACOS_FILES})
 
-    set(OS_PLATFORM_SPECIFIC_FILES ${OS_MACOS_FILES})
+    set(OS_PLATFORM_SPECIFIC_FILES ${OS_MACOS_FILES} ${OS_DARWIN_FILES})
+
+    message(${OS_PLATFORM_SPECIFIC_FILES})
 
     set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()

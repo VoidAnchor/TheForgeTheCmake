@@ -6,12 +6,14 @@ set(APPLE_PLATFORM OFF)
 set(LINUX OFF)
 set(WINDOWS OFF)
 
+# On macOS, we always set Metal support to on.
 set(METAL OFF)
 
 # Make our APIs into options
 option(DX12 "DirectX12 (Windows only)" OFF)
 option(DX11 "DirectX11 (Windows only)" OFF)
 option(VULKAN "Vulkan" OFF)
+option(DYNAMIC_LIB "Dynamic Library" OFF)
 
 set(ASSIMP OFF)
 set(OZZ OFF)
@@ -36,6 +38,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
     find_library(APPLE_APPKIT AppKit)
     find_library(APPLE_QUARTZCORE QuartzCore)
+    find_library(APPLE_IOKIT IOKit)
 
     set(RENDER_LIBRARIES
         ${RENDER_LIBRARIES}
@@ -88,6 +91,8 @@ if(${WINDOWS} MATCHES ON)
     )
 endif()
 
+
+# Setup some sane API defaults.
 set(API_SELECTED ON)
 
 if(${VULKAN} MATCHES OFF)
@@ -98,6 +103,27 @@ if(${VULKAN} MATCHES OFF)
             endif()
         endif()
     endif()
+endif()
+
+# Apple platforms should always default to Metal.
+if (${APPLE_PLATFORM} MATCHES ON)
+    if(${METAL} MATCHES OFF)
+        set(METAL ON)
+    endif()
+
+    if(${VULKAN} MATCHES ON)
+        set(VULKAN OFF)
+    endif()
+
+    if(${DX11} MATCHES ON)
+        set(DX11 OFF)
+    endif()
+
+    if(${DX12} MATCHES ON)
+        set(DX12 OFF)
+    endif()
+
+    set(API_SELECTED ON)
 endif()
 
 if (${API_SELECTED} MATCHES OFF)
@@ -160,5 +186,40 @@ if(${DX12} MATCHES ON)
         "dxcompiler.lib"
     )
 endif()
+
+message("The following options have been set to on:\n")
+if(${APPLE_PLATFORM} MATCHES ON)
+    message("Apple platform")
+endif()
+
+if(${LINUX} MATCHES ON)
+    message("Linux platform")
+endif()
+
+if(${WINDOWS} MATCHES ON)
+    message("Windows platform")
+endif()
+
+if(${METAL} MATCHES ON)
+    message("Metal reendering API")
+endif()
+
+if(${VULKAN} MATCHES ON)
+    message("Vulkan rendering API")
+endif()
+
+if(${DX11} MATCHES ON)
+    message("DirectX 11 rendering API")
+endif()
+
+if(${DX12} MATCHES ON)
+    message("DirectX 12 rendering API")
+endif()
+
+if(${DYNAMIC_LIB} MATCHES ON)
+    message("Dynamic library")
+endif()
+
+message("\n")
 
 add_subdirectory(Common_3)
