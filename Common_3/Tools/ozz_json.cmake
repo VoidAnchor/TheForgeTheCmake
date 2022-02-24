@@ -16,3 +16,6 @@ set(OZZ_JSON_FILES
 )
 
 add_library(ozz_json STATIC ${OZZ_JSON_FILES})
+target_include_directories(ozz_json PUBLIC ../../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include)
+
+set_property(TARGET ozz_json PROPERTY CXX_STANDARD 17)

@@ -388,6 +388,18 @@ set(GAINPUT_STATIC_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/gestures/GainputTapGesture.cpp
 )
 
+set(GAINPUT_MACOS_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputMac.mm
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/pad/GainputInputDevicePadMac.cpp
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/mouse/GainputInputDeviceMouseMac.mm
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/mouse/GainputInputDeviceMouseMacRaw.mm
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/keyboard/GainputInputDeviceKeyboardMac.cpp
+)
+ 
+set(GAINPUT_IOS_FILES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/gainput/lib/source/gainput/GainputIos.mm
+)
+ 
 include(OS.cmake)
 include(Renderer/Renderer.cmake)
 include(TheForge.cmake)

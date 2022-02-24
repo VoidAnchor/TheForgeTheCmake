@@ -48,6 +48,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(GLOBAL_LIBRARIES
         ${GLOBAL_LIBRARIES}
         ${APPLE_APPKIT}
+        ${APPLE_IOKIT}
     )
 
     set(CMAKE_CXX_FLAGS "-x objective-c++")
@@ -159,7 +160,7 @@ if(${METAL} MATCHES ON)
     set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
         ${APPLE_METAL}
         ${APPLE_METALKIT}
-        ${MetalPerformanceShaders}
+        ${APPLE_METALPS}
     )
 
     set(GLOBAL_DEFINES ${GLOBAL_DEFINES}

@@ -28,3 +28,6 @@ set(OZZ_ANIMATION_FILES
 add_library(ozz_animation STATIC ${OZZ_ANIMATION_FILES})
 
 target_link_libraries(ozz_animation ozz_base)
+target_include_directories(ozz_animation PUBLIC ../../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include)
+
+set_property(TARGET ozz_animation PROPERTY CXX_STANDARD 17)
