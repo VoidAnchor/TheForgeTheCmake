@@ -41,7 +41,7 @@ set(RENDER_QUEST_FILES
 set(DX11_FILES
     ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11.cpp
     ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11CapBuilder.h
-    ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11Commands.h
+    ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11Config.h
     ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11Raytracing.cpp
     ../The-Forge/Common_3/Renderer/Direct3D11/Direct3D11ShaderReflection.cpp
 )
@@ -71,6 +71,7 @@ endif()
 
 if(${VULKAN} MATCHES ON)
     set(RENDERER_FILES ${RENDERER_FILES} ${VULKAN_FILES})
+    set(RENDER_LIBRARIES ${RENDER_LIBRARIES} SpirvTools)
 endif()
 
 if(${DX11} MATCHES ON)

@@ -22,6 +22,7 @@ set(RENDER_LIBRARIES "")
 set(RENDER_INCLUDES "")
 
 set(GLOBAL_LIBRARIES "")
+set(GLOBAL_LIBRARY_PATHS "")
 set(GLOBAL_INCLUDES "")
 set(GLOBAL_DEFINES "")
 
@@ -75,10 +76,20 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message("Windows detected. Generating Windows targets.")
     set(WINDOWS ON)
 
+    set(GLOBAL_LIBRARY_PATHS
+        "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/ags/ags_lib/lib"
+        "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/nvapi/amd64"
+        "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/DirectXShaderCompiler/lib/x64"
+        "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/winpixeventruntime/bin"
+    )
+
     set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
+
         "WinPixEventRuntime.lib"
         "amd_ags_x64.lib"
         "nvapi64.lib"
+        "Xinput9_1_0.lib"
+        "ws2_32.lib"
     )
     
     set(PLATFORM_STATIC_EXT ".lib")
@@ -144,12 +155,13 @@ endif()
 if(${VULKAN} MATCHES ON)
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES TRUE)
-        set(RENDER_LIBRARIES ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
+        message("Vulkan SDK found.")
+        set(RENDER_LIBRARIES ${RENDER_LIBRARIES} ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
         set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
-        set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-             "VULKAN"
-        )
-     endif()
+        include_directories(${Vulkan_INCLUDE_DIRS})
+    else()
+        message("Vulkan SDK not found.  Please make sure it is installed and added to your path.")
+    endif()
 endif()
 
 if(${METAL} MATCHES ON)
@@ -167,26 +179,24 @@ if(${METAL} MATCHES ON)
         "METAL"
     )
 endif()
+if(${DX12} MATCHES ON)
+
+    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
+            "dxcompiler.lib"
+            "d3d12.lib"
+            )
+    set(DX11 ON)
+endif()
 
 if(${DX11} MATCHES ON)
-    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-        "DIRECT3D11"
-    )
 
     set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
         "dxcompiler.lib"
+        "d3d11.lib"
     )
 endif()
 
-if(${DX12} MATCHES ON)
-    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
-        "DIRECT3D12"
-    )
-    
-    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
-        "dxcompiler.lib"
-    )
-endif()
+
 
 message("The following options have been set to on:\n")
 if(${APPLE_PLATFORM} MATCHES ON)
