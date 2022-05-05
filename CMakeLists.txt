@@ -12,6 +12,7 @@ set(METAL OFF)
 # Make our APIs into options
 option(DX12 "DirectX12 (Windows only)" OFF)
 option(DX11 "DirectX11 (Windows only)" OFF)
+option(EXAMPLES "The Forge examples" OFF)
 option(VULKAN "Vulkan" OFF)
 option(DYNAMIC_LIB "Dynamic Library" OFF)
 
