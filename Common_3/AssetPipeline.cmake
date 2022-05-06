@@ -17,6 +17,18 @@ if(${APPLE_PLATFORM} MATCHES ON)
     )
 endif()
 
+if(${WINDOWS} MATCHES ON)
+    set(ASSET_PIPELINE_FILES ${ASSET_PIPELINE_FILES}
+        ../The-Forge/Common_3/Tools/FileSystem/WindowsToolsFileSystem.cpp
+    )
+endif()
+
+if(${LINUX} MATCHES ON)
+    set(ASSET_PIPELINE_FILES ${ASSET_PIPELINE_FILES}
+        ../The-Forge/Common_3/Tools/FileSystem/LinuxToolsFileSystem.cpp
+    )
+endif()
+
 add_executable(AssetPipelineCmd ${ASSET_PIPELINE_FILES})
 target_link_libraries(AssetPipelineCmd ozz_animation_offline ozz_animation ozz_base The-Forge ${GLOBAL_LIBRARIES} ${RENDER_LIBRARIES})
 set_property(TARGET AssetPipelineCmd PROPERTY CXX_STANDARD 17)
