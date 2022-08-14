@@ -23,9 +23,10 @@ set(RENDER_LIBRARIES "")
 set(RENDER_INCLUDES "")
 
 set(GLOBAL_LIBRARIES "")
-set(GLOBAL_LIBRARY_PATHS "")
 set(GLOBAL_INCLUDES "")
 set(GLOBAL_DEFINES "")
+
+set(RENDER_LIBRARY_PATHS "")
 
 set(PLATFORM_STATIC_EXT "")
 set(PLATFORM_DYNAMIC_EXT "")
@@ -77,7 +78,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message("Windows detected. Generating Windows targets.")
     set(WINDOWS ON)
 
-    set(GLOBAL_LIBRARY_PATHS
+    set(RENDER_LIBRARY_PATHS
         "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/ags/ags_lib/lib"
         "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/nvapi/amd64"
         "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/DirectXShaderCompiler/lib/x64"

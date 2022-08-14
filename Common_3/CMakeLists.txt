@@ -8,8 +8,6 @@ set(MIDDLEWARE_ECS_FILES
     ../The-Forge/Middleware_3/ECS/EntityManager.cpp
     ../The-Forge/Middleware_3/ECS/EntityManager.h
 )
-
-link_directories(${GLOBAL_LIBRARY_PATHS})
  
 include(ozz.cmake)
 include(SpirVTools.cmake)

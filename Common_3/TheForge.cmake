@@ -44,6 +44,8 @@ set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(The-Forge PUBLIC The-Forge-Dependencies ozz_animation ${GLOBAL_LIBRARIES} ${RENDER_LIBRARIES})
 
+target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
+
 target_compile_definitions(The-Forge PUBLIC ${GLOBAL_DEFINES})
 
 if (${APPLE_PLATFORM} MATCHES ON)
