@@ -84,6 +84,13 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         "${CMAKE_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/winpixeventruntime/bin"
     )
 
+    find_package(Vulkan REQUIRED)
+    if (Vulkan_FOUND MATCHES "True")
+        set(RENDER_LIBRARIES ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
+        set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
+        set(VULKAN ON)
+    endif()
+    
     set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
 
         "WinPixEventRuntime.lib"
