@@ -1,5 +1,3 @@
-project(The-Forge)
-
 # Handle library creation here.
 
 set(FORGE_FILES

@@ -26,8 +26,12 @@ set(OZZ_BASE_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/src/base/platform.cc
 )
 
+set(OZZ_BASE_INCLUDES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include
+)
+
 add_library(ozz_base STATIC ${OZZ_BASE_FILES})
 
-target_include_directories(ozz_base PUBLIC ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include)
+target_include_directories(ozz_base PUBLIC ${OZZ_BASE_INCLUDES})
 
 set_property(TARGET ozz_base PROPERTY CXX_STANDARD 17)

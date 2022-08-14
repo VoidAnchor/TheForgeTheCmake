@@ -23,10 +23,14 @@ set(OZZ_ANIMATION_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/src/animation/offline/track_optimizer.cc
 )
 
+set(OZZ_ANIMATION_INCLUDES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include
+)
+
 add_library(ozz_animation_offline STATIC ${OZZ_ANIMATION_FILES})
 
 target_link_libraries(ozz_animation_offline ozz_base)
 
-target_include_directories(ozz_animation_offline PUBLIC ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include)
+target_include_directories(ozz_animation_offline PUBLIC ${OZZ_ANIMATION_INCLUDES})
 
 set_property(TARGET ozz_animation_offline PROPERTY CXX_STANDARD 17)

@@ -1,5 +1,3 @@
-project(SpirvTools)
-
 set(SPIRVTOOLS_SOURCE
     ../The-Forge/Common_3/ThirdParty/OpenSource/SPIRV_Cross/spirv_cfg.cpp
     ../The-Forge/Common_3/ThirdParty/OpenSource/SPIRV_Cross/spirv_cfg.hpp

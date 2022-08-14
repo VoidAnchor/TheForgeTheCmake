@@ -25,9 +25,13 @@ set(OZZ_ANIMATION_FILES
     ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/src/animation/runtime/track_triggering_job.cc
 )
 
+set(OZZ_ANIMATION_INCLUDES
+    ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include
+)
+
 add_library(ozz_animation STATIC ${OZZ_ANIMATION_FILES})
 
 target_link_libraries(ozz_animation ozz_base)
-target_include_directories(ozz_animation PUBLIC ../The-Forge/Common_3/ThirdParty/OpenSource/ozz-animation/include)
+target_include_directories(ozz_animation PUBLIC ${OZZ_ANIMATION_INCLUDES})
 
 set_property(TARGET ozz_animation PROPERTY CXX_STANDARD 17)

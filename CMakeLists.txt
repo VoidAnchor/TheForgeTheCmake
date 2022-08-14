@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
-project(The-Forge-Workspace)
+
+project(The-Forge)
 
 # Do some OS checks, and setup accordingly.
 set(APPLE_PLATFORM OFF)
@@ -47,10 +48,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     message("Linux detected. Generating Linux targets.")
     set(LINUX ON)
 
-    find_package(Vulkan REQUIRED)
-    if (Vulkan_FOUND MATCHES "True")
-        set(VULKAN ON)
-    endif()
+    set(VULKAN ON)
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
@@ -127,6 +125,8 @@ if (${API_SELECTED} MATCHES OFF)
 
     if(${WINDOWS} MATCHES ON)
         set(DX12 ON)
+        # Needed due to how the profiler in forge force-links to vulkan as well.
+        set(VULKAN ON)
     endif()
 endif()
 
@@ -155,6 +155,7 @@ if(${METAL} MATCHES ON)
         "METAL"
     )
 endif()
+
 if(${DX12} MATCHES ON)
 
     set(RENDER_LIBRARIES ${RENDER_LIBRARIES}

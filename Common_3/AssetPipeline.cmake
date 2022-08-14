@@ -1,5 +1,3 @@
-project(AssetPipeline)
-
 set (ASSET_PIPELINE_FILES
     ../The-Forge/Common_3/Tools/FileSystem/IToolFileSystem.h
     ../The-Forge/Common_3/ThirdParty/OpenSource/TressFX/TressFXAsset.cpp
@@ -32,7 +30,6 @@ endif()
 add_executable(AssetPipelineCmd ${ASSET_PIPELINE_FILES})
 target_link_libraries(AssetPipelineCmd ozz_animation_offline ozz_animation ozz_base The-Forge ${RENDER_LIBRARIES})
 set_property(TARGET AssetPipelineCmd PROPERTY CXX_STANDARD 17)
-
 
 if (${APPLE_PLATFORM} MATCHES ON)
     set_property (TARGET AssetPipelineCmd APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
