@@ -38,7 +38,7 @@ else()
     )
 endif()
 
-target_include_directories(The-Forge PUBLIC ../The-Forge/Common_3/)
+target_include_directories(The-Forge PUBLIC ../The-Forge/Common_3/ ${RENDER_INCLUDES})
 
 set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
 
