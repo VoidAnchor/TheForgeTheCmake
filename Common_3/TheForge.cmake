@@ -38,6 +38,7 @@ else()
     )
 endif()
 
+target_include_directories(The-Forge PUBLIC ../The-Forge/Common_3/)
 
 set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
 
