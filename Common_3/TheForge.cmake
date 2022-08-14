@@ -42,11 +42,11 @@ target_include_directories(The-Forge PUBLIC ../The-Forge/Common_3/ ${RENDER_INCL
 
 set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
 
-target_link_libraries(The-Forge PUBLIC The-Forge-Dependencies ozz_animation ${GLOBAL_LIBRARIES} ${RENDER_LIBRARIES})
+target_link_libraries(The-Forge PUBLIC The-Forge-Dependencies ozz_animation ${RENDER_LIBRARIES})
 
 target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
 
-target_compile_definitions(The-Forge PUBLIC ${GLOBAL_DEFINES})
+target_compile_definitions(The-Forge PUBLIC ${RENDER_DEFINES})
 
 if (${APPLE_PLATFORM} MATCHES ON)
     set_property (TARGET The-Forge APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")

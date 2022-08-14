@@ -30,7 +30,7 @@ if(${LINUX} MATCHES ON)
 endif()
 
 add_executable(AssetPipelineCmd ${ASSET_PIPELINE_FILES})
-target_link_libraries(AssetPipelineCmd ozz_animation_offline ozz_animation ozz_base The-Forge ${GLOBAL_LIBRARIES} ${RENDER_LIBRARIES})
+target_link_libraries(AssetPipelineCmd ozz_animation_offline ozz_animation ozz_base The-Forge ${RENDER_LIBRARIES})
 set_property(TARGET AssetPipelineCmd PROPERTY CXX_STANDARD 17)
 
 

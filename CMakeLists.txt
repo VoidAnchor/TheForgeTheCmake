@@ -20,13 +20,9 @@ set(ASSIMP OFF)
 set(OZZ OFF)
 
 set(RENDER_LIBRARIES "")
-set(RENDER_INCLUDES "")
-
-set(GLOBAL_LIBRARIES "")
-set(GLOBAL_INCLUDES "")
-set(GLOBAL_DEFINES "")
-
 set(RENDER_LIBRARY_PATHS "")
+set(RENDER_INCLUDES "")
+set(RENDER_DEFINES "")
 
 set(PLATFORM_STATIC_EXT "")
 set(PLATFORM_DYNAMIC_EXT "")
@@ -46,10 +42,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(RENDER_LIBRARIES
         ${RENDER_LIBRARIES}
         ${APPLE_QUARTZCORE}
-    )
-
-    set(GLOBAL_LIBRARIES
-        ${GLOBAL_LIBRARIES}
         ${APPLE_APPKIT}
         ${APPLE_IOKIT}
     )
@@ -65,8 +57,10 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES "True")
-        set(RENDER_LIBRARIES ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
-        set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
+        set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
+            ${Vulkan_LIBRARIES})
+        set(RENDER_INCLUDES ${RENDER_INCLUDES}
+            ${Vulkan_INCLUDE_DIRS})
         set(VULKAN ON)
     endif()
     
@@ -100,7 +94,7 @@ endif()
 
 # Gather the switches, set up our required defines.
 if(${WINDOWS} MATCHES ON)
-    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+    set(RENDER_DEFINES ${RENDER_DEFINES}
         "_WINDOWS"
     )
 endif()
@@ -158,9 +152,8 @@ if(${VULKAN} MATCHES ON)
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES TRUE)
         message("Vulkan SDK found.")
-        set(RENDER_LIBRARIES ${RENDER_LIBRARIES} ${GLOBAL_LIBRARIES} ${Vulkan_LIBRARIES})
-        set(RENDER_INCLUDES ${GLOBAL_INCLUDES} ${Vulkan_INCLUDE_DIRS})
-        include_directories(${Vulkan_INCLUDE_DIRS})
+        set(RENDER_LIBRARIES ${RENDER_LIBRARIES} ${Vulkan_LIBRARIES})
+        set(RENDER_INCLUDES ${RENDER_INCLUDES} ${Vulkan_INCLUDE_DIRS})
     else()
         message("Vulkan SDK not found.  Please make sure it is installed and added to your path.")
     endif()
@@ -177,7 +170,7 @@ if(${METAL} MATCHES ON)
         ${APPLE_METALPS}
     )
 
-    set(GLOBAL_DEFINES ${GLOBAL_DEFINES}
+    set(RENDER_DEFINES ${RENDER_DEFINES}
         "METAL"
     )
 endif()
