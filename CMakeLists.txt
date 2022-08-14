@@ -24,12 +24,6 @@ set(RENDER_LIBRARY_PATHS "")
 set(RENDER_INCLUDES "")
 set(RENDER_DEFINES "")
 
-set(PLATFORM_STATIC_EXT "")
-set(PLATFORM_DYNAMIC_EXT "")
-
-set(THE_FORGE_INCLUDE_DIRS "" CACHE PATH "The Forge's include directories.")
-set(THE_FORGE_LIBRARIES "" CACHE PATH "The Forge's libraries.")
-
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     message("Apple platform detected. Generating macOS and iOS targets.")
 
@@ -47,8 +41,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     )
 
     set(CMAKE_CXX_FLAGS "-x objective-c++")
-    set(PLATFORM_STATIC_EXT ".a")
-    set(PLATFORM_DYNAMIC_EXT ".dylib")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -57,15 +49,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
     find_package(Vulkan REQUIRED)
     if (Vulkan_FOUND MATCHES "True")
-        set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
-            ${Vulkan_LIBRARIES})
-        set(RENDER_INCLUDES ${RENDER_INCLUDES}
-            ${Vulkan_INCLUDE_DIRS})
         set(VULKAN ON)
     endif()
-    
-    set(PLATFORM_STATIC_EXT ".a")
-    set(PLATFORM_DYNAMIC_EXT ".so")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
@@ -87,9 +72,6 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         "Xinput9_1_0.lib"
         "ws2_32.lib"
     )
-    
-    set(PLATFORM_STATIC_EXT ".lib")
-    set(PLATFORM_DYNAMIC_EXT ".dll")
 endif()
 
 # Gather the switches, set up our required defines.
