@@ -56,14 +56,13 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     set(WINDOWS ON)
 
     set(RENDER_LIBRARY_PATHS
-        "The-Forge/Common_3/ThirdParty/OpenSource/ags/ags_lib/lib"
-        "The-Forge/Common_3/ThirdParty/OpenSource/nvapi/amd64"
-        "The-Forge/Common_3/ThirdParty/OpenSource/DirectXShaderCompiler/lib/x64"
-        "The-Forge/Common_3/ThirdParty/OpenSource/winpixeventruntime/bin"
+        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/ags/ags_lib/lib"
+        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/nvapi/amd64"
+        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/DirectXShaderCompiler/lib/x64"
+        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/winpixeventruntime/bin"
     )
 
     set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
-
         "WinPixEventRuntime.lib"
         "amd_ags_x64.lib"
         "nvapi64.lib"
