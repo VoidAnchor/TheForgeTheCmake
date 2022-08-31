@@ -8,8 +8,7 @@ set(MIDDLEWARE_ECS_FILES
     ../The-Forge/Middleware_3/ECS/EntityManager.cpp
     ../The-Forge/Middleware_3/ECS/EntityManager.h
 )
- 
-include(ozz.cmake)
+
 include(SpirVTools.cmake)
 include(Dependencies.cmake)
 include(OS.cmake)

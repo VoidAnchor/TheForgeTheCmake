@@ -20,62 +20,20 @@ option(DYNAMIC_LIB "Dynamic Library" OFF)
 set(ASSIMP OFF)
 set(OZZ OFF)
 
-set(RENDER_LIBRARIES "")
-set(RENDER_LIBRARY_PATHS "")
-set(RENDER_INCLUDES "")
-set(RENDER_DEFINES "")
-
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     message("Apple platform detected. Generating macOS and iOS targets.")
-
     set(APPLE_PLATFORM ON)
-
-    find_library(APPLE_APPKIT AppKit)
-    find_library(APPLE_QUARTZCORE QuartzCore)
-    find_library(APPLE_IOKIT IOKit)
-
-    set(RENDER_LIBRARIES
-        ${RENDER_LIBRARIES}
-        ${APPLE_QUARTZCORE}
-        ${APPLE_APPKIT}
-        ${APPLE_IOKIT}
-    )
-
-    set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     message("Linux detected. Generating Linux targets.")
     set(LINUX ON)
-
     set(VULKAN ON)
 endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     message("Windows detected. Generating Windows targets.")
     set(WINDOWS ON)
-
-    set(RENDER_LIBRARY_PATHS
-        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/ags/ags_lib/lib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/nvapi/amd64"
-        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/DirectXShaderCompiler/lib/x64"
-        "${CMAKE_CURRENT_SOURCE_DIR}/The-Forge/Common_3/ThirdParty/OpenSource/winpixeventruntime/bin"
-    )
-
-    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
-        "WinPixEventRuntime.lib"
-        "amd_ags_x64.lib"
-        "nvapi64.lib"
-        "Xinput9_1_0.lib"
-        "ws2_32.lib"
-    )
-endif()
-
-# Gather the switches, set up our required defines.
-if(${WINDOWS} MATCHES ON)
-    set(RENDER_DEFINES ${RENDER_DEFINES}
-        "_WINDOWS"
-    )
 endif()
 
 
@@ -129,50 +87,9 @@ if (${API_SELECTED} MATCHES OFF)
     endif()
 endif()
 
-if(${VULKAN} MATCHES ON)
-    find_package(Vulkan REQUIRED)
-    if (Vulkan_FOUND MATCHES TRUE)
-        message("Vulkan SDK found.")
-        set(RENDER_LIBRARIES ${RENDER_LIBRARIES} Vulkan::Vulkan)
-    else()
-        message("Vulkan SDK not found.  Please make sure it is installed and added to your path.")
-    endif()
-endif()
-
-if(${METAL} MATCHES ON)
-    find_library(APPLE_METAL Metal)
-    find_library(APPLE_METALKIT MetalKit)
-    find_library(APPLE_METALPS MetalPerformanceShaders)
-
-    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
-        ${APPLE_METAL}
-        ${APPLE_METALKIT}
-        ${APPLE_METALPS}
-    )
-
-    set(RENDER_DEFINES ${RENDER_DEFINES}
-        "METAL"
-    )
-endif()
-
 if(${DX12} MATCHES ON)
-
-    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
-            "dxcompiler.lib"
-            "d3d12.lib"
-            )
     set(DX11 ON)
 endif()
-
-if(${DX11} MATCHES ON)
-
-    set(RENDER_LIBRARIES ${RENDER_LIBRARIES}
-        "dxcompiler.lib"
-        "d3d11.lib"
-    )
-endif()
-
-
 
 message("The following options have been set to on:\n")
 if(${APPLE_PLATFORM} MATCHES ON)

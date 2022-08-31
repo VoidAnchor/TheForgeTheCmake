@@ -6,6 +6,7 @@
 *.lib
 *.app
 .vscode
+.vs
 .DS_Store
 .idea
 cmake-build*
