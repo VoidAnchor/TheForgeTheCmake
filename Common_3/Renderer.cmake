@@ -116,8 +116,6 @@ if(${APPLE_PLATFORM} MATCHES ON)
         ${APPLE_APPKIT}
         ${APPLE_IOKIT}
     )
-
-    set(CMAKE_CXX_FLAGS "-x objective-c++")
 endif()
 
 if(${WINDOWS} MATCHES ON)
