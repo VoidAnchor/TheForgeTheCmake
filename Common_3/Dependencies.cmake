@@ -209,6 +209,7 @@ if(${APPLE_PLATFORM} MATCHES ON)
 endif()
 add_library(GaInput STATIC ${GAINPUT_STATIC_FILES})
 if (${APPLE_PLATFORM} MATCHES ON)
+    set_source_files_properties(${GAINPUT_STATIC_FILES} PROPERTIES COMPILE_FLAGS "-x objective-c++")
     target_compile_options(GaInput PRIVATE "-fno-objc-arc")
 endif()
 
