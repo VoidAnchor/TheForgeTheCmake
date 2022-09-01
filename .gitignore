@@ -1,4 +1,5 @@
 [Bb]uild
+out
 *.exe
 *.so
 *.dll

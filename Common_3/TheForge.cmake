@@ -23,7 +23,6 @@ set(FORGE_FILES
         ${OS_MIDDLEWARE_ANIMATION_FILES}
         ${OS_MIDDLEWARE_PARALLEL_PRIMS_FILES}
         ${OS_PLATFORM_SPECIFIC_FILES}
-        ${THIRD_PARTY_FILES}
 )
 
 if(${DYNAMIC_LIB} MATCHES OFF)
@@ -40,17 +39,16 @@ endif()
 target_include_directories(The-Forge PUBLIC
     ../The-Forge/Common_3/
     ${RENDER_INCLUDES}
-    ${THIRD_PARTY_INCLUDES}
 )
 
 set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
 
-target_link_libraries(The-Forge PUBLIC ${RENDER_LIBRARIES})
+target_link_libraries(The-Forge PUBLIC ${RENDER_LIBRARIES} ${THIRD_PARTY_DEPS})
 
 target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
 
 target_compile_definitions(The-Forge PUBLIC ${RENDER_DEFINES})
 
 if (${APPLE_PLATFORM} MATCHES ON)
-    set_property (TARGET The-Forge APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
+    set_property (TARGET GaInput APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
 endif()

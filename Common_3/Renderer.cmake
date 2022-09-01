@@ -1,6 +1,4 @@
 # Renderers
-set(RENDER_LINK_LIBS "")
-
 set(RENDERER_SOURCE_FILES
     ../The-Forge/Common_3/Renderer/ResourceLoader.cpp
     ../The-Forge/Common_3/Renderer/Renderer.cpp
@@ -74,10 +72,6 @@ if(${METAL} MATCHES ON)
         ${APPLE_METAL}
         ${APPLE_METALKIT}
         ${APPLE_METALPS}
-    )
-
-    set(RENDER_DEFINES ${RENDER_DEFINES}
-        "METAL"
     )
 
     set(RENDERER_FILES ${RENDERER_FILES} ${METAL_FILES})

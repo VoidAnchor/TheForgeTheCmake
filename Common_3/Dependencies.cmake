@@ -29,6 +29,7 @@ set_property(TARGET DirectXShaderCompiler PROPERTY IMPORTED_LOCATION
 set(BASISU_FILES
     ${THIRD_PARTY_DIR}/basis_universal/transcoder/basisu_transcoder.cpp
 )
+add_library(Basisu STATIC ${BASISU_FILES})
 source_group(ThirdParty\\Basisu FILES ${BASISU_FILES})
 
 set(EASTL_FILES
@@ -44,6 +45,7 @@ set(EASTL_FILES
      ${THIRD_PARTY_DIR}/EASTL/EAStdC/EAMemory.cpp
      ${THIRD_PARTY_DIR}/EASTL/EAStdC/EASprintf.cpp
 )
+add_library(Eastl STATIC ${EASTL_FILES})
 source_group(ThirdParty\\Eastl FILES ${EASTL_FILES})
 
 set(IMGUI_FILES
@@ -55,6 +57,7 @@ set(IMGUI_FILES
      ${THIRD_PARTY_DIR}/imgui/imgui.cpp
      ${THIRD_PARTY_DIR}/imgui/imgui.h
 )
+add_library(Imgui STATIC ${IMGUI_FILES})
 source_group(ThirdParty\\Imgui FILES ${IMGUI_FILES})
 
 set(LUA_FILES
@@ -92,6 +95,7 @@ set(LUA_FILES
      ${THIRD_PARTY_DIR}/lua-5.3.5/src/lvm.c
      ${THIRD_PARTY_DIR}/lua-5.3.5/src/lzio.c
 )
+add_library(Lua STATIC ${LUA_FILES})
 source_group(ThirdParty\\Lua FILES ${LUA_FILES})
 
 set(MINIZIP_FILES
@@ -125,6 +129,7 @@ set(MINIZIP_FILES
      ${THIRD_PARTY_DIR}/minizip/mz_zip.c
      ${THIRD_PARTY_DIR}/minizip/mz_zip.h
 )
+add_library(MiniZip STATIC ${MINIZIP_FILES})
 source_group(ThirdParty\\MiniZip FILES ${MINIZIP_FILES})
 
 set(RMEM_FILES
@@ -132,6 +137,7 @@ set(RMEM_FILES
      ${THIRD_PARTY_DIR}/rmem/src/rmem_hook.cpp
      ${THIRD_PARTY_DIR}/rmem/src/rmem_lib.cpp
 )
+add_library(RMem STATIC ${RMEM_FILES})
 source_group(ThirdParty\\RMem FILES ${RMEM_FILES})
 
 set(MESHOPTIMIZER_FILES
@@ -152,12 +158,14 @@ set(MESHOPTIMIZER_FILES
      ${THIRD_PARTY_DIR}/meshoptimizer/src/vfetchanalyzer.cpp
      ${THIRD_PARTY_DIR}/meshoptimizer/src/vfetchoptimizer.cpp
 )
+add_library(MeshOptimizer STATIC ${MESHOPTIMIZER_FILES})
 source_group(ThirdParty\\MeshOptimizer FILES ${MESHOPTIMIZER_FILES})
 
 set(THIRDPARTY_OSS_TINYEXR_FILES
      ${THIRD_PARTY_DIR}/TinyEXR/tinyexr.cpp
      ${THIRD_PARTY_DIR}/TinyEXR/tinyexr.h
 )
+add_library(TinyEXR STATIC ${THIRDPARTY_OSS_TINYEXR_FILES})
 source_group(ThirdParty\\TinyEXR FILES ${THIRDPARTY_OSS_TINYEXR_FILES})
 
 set(GAINPUT_STATIC_FILES
@@ -197,13 +205,18 @@ set(GAINPUT_MACOS_FILES
 set(GAINPUT_IOS_FILES
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputIos.mm
 )
+source_group(ThirdParty\\GaInput FILES ${GAINPUT_STATIC_FILES})
+source_group(ThirdParty\\GaInput\\MacOS FILES ${GAINPUT_MACOS_FILES})
 if(${APPLE_PLATFORM} MATCHES ON) 
     set(GAINPUT_STATIC_FILES
         ${GAINPUT_STATIC_FILES}
         ${GAINPUT_MACOS_FILES}
     )
 endif()
-source_group(ThirdParty\\GaInput FILES ${GAINPUT_STATIC_FILES})
+add_library(GaInput STATIC ${GAINPUT_STATIC_FILES})
+if (${APPLE_PLATFORM} MATCHES ON)
+    set_property (TARGET GaInput APPEND_STRING PROPERTY COMPILE_FLAGS "-fno-objc-arc")
+endif()
 
 set(OZZ_INCLUDES
     ${THIRD_PARTY_DIR}/ozz-animation/include
@@ -293,20 +306,18 @@ set(OZZ_FILES
     ${OZZ_ANIMATION_FILES}
     ${OZZ_ANIMATION_OFFLINE_FILES}
 )
+add_library(Ozz STATIC ${OZZ_FILES})
+target_include_directories(Ozz PUBLIC ${OZZ_INCLUDES})
 
-set(THIRD_PARTY_FILES
-    ${BASISU_FILES}
-    ${EASTL_FILES}
-    ${IMGUI_FILES}
-    ${LUA_FILES}
-    ${MINIZIP_FILES}
-    ${RMEM_FILES}
-    ${MESHOPTIMIZER_FILES}
-    ${THIRDPARTY_OSS_TINYEXR_FILES}
-    ${GAINPUT_STATIC_FILES}
-    ${OZZ_FILES}
-)
-
-set(THIRD_PARTY_INCLUDES
-    ${OZZ_INCLUDES}
+set(THIRD_PARTY_DEPS
+    Basisu
+    Eastl
+    Imgui
+    Lua
+    MiniZip
+    RMem
+    MeshOptimizer
+    TinyEXR
+    GaInput
+    Ozz
 )
