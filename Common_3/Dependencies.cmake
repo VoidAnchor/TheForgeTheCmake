@@ -208,6 +208,9 @@ if(${APPLE_PLATFORM} MATCHES ON)
     )
 endif()
 add_library(GaInput STATIC ${GAINPUT_STATIC_FILES})
+if (${APPLE_PLATFORM} MATCHES ON)
+    set_target_properties(GaInput PROPERTIES COMPILE_FLAGS "-fno-objc-arc")
+endif()
 
 set(OZZ_INCLUDES
     ${THIRD_PARTY_DIR}/ozz-animation/include

@@ -50,5 +50,5 @@ target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
 target_compile_definitions(The-Forge PUBLIC ${RENDER_DEFINES})
 
 if (${APPLE_PLATFORM} MATCHES ON)
-    set_property (TARGET GaInput APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
+    set_target_properties(The-Forge PROPERTIES COMPILE_FLAGS "-fobjc-arc")
 endif()
