@@ -1,3 +1,5 @@
+set(CMAKE_CXX_STANDARD 17)
+
 set(THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/ThirdParty/OpenSource)
 
 add_library(WinPixEventRuntime SHARED IMPORTED)
@@ -30,7 +32,6 @@ set(BASISU_FILES
     ${THIRD_PARTY_DIR}/basis_universal/transcoder/basisu_transcoder.cpp
 )
 add_library(Basisu STATIC ${BASISU_FILES})
-source_group(ThirdParty\\Basisu FILES ${BASISU_FILES})
 
 set(EASTL_FILES
      ${THIRD_PARTY_DIR}/EASTL/assert.cpp
@@ -46,7 +47,6 @@ set(EASTL_FILES
      ${THIRD_PARTY_DIR}/EASTL/EAStdC/EASprintf.cpp
 )
 add_library(Eastl STATIC ${EASTL_FILES})
-source_group(ThirdParty\\Eastl FILES ${EASTL_FILES})
 
 set(IMGUI_FILES
      ${THIRD_PARTY_DIR}/imgui/imconfig.h
@@ -58,7 +58,6 @@ set(IMGUI_FILES
      ${THIRD_PARTY_DIR}/imgui/imgui.h
 )
 add_library(Imgui STATIC ${IMGUI_FILES})
-source_group(ThirdParty\\Imgui FILES ${IMGUI_FILES})
 
 set(LUA_FILES
      ${THIRD_PARTY_DIR}/lua-5.3.5/src/lapi.c
@@ -96,7 +95,6 @@ set(LUA_FILES
      ${THIRD_PARTY_DIR}/lua-5.3.5/src/lzio.c
 )
 add_library(Lua STATIC ${LUA_FILES})
-source_group(ThirdParty\\Lua FILES ${LUA_FILES})
 
 set(MINIZIP_FILES
      ${THIRD_PARTY_DIR}/minizip/lib/brg/aes.h
@@ -130,7 +128,6 @@ set(MINIZIP_FILES
      ${THIRD_PARTY_DIR}/minizip/mz_zip.h
 )
 add_library(MiniZip STATIC ${MINIZIP_FILES})
-source_group(ThirdParty\\MiniZip FILES ${MINIZIP_FILES})
 
 set(RMEM_FILES
      ${THIRD_PARTY_DIR}/rmem/src/rmem_get_module_info.cpp
@@ -138,7 +135,6 @@ set(RMEM_FILES
      ${THIRD_PARTY_DIR}/rmem/src/rmem_lib.cpp
 )
 add_library(RMem STATIC ${RMEM_FILES})
-source_group(ThirdParty\\RMem FILES ${RMEM_FILES})
 
 set(MESHOPTIMIZER_FILES
      ${THIRD_PARTY_DIR}/meshoptimizer/src/vertexfilter.cpp
@@ -159,14 +155,12 @@ set(MESHOPTIMIZER_FILES
      ${THIRD_PARTY_DIR}/meshoptimizer/src/vfetchoptimizer.cpp
 )
 add_library(MeshOptimizer STATIC ${MESHOPTIMIZER_FILES})
-source_group(ThirdParty\\MeshOptimizer FILES ${MESHOPTIMIZER_FILES})
 
 set(THIRDPARTY_OSS_TINYEXR_FILES
      ${THIRD_PARTY_DIR}/TinyEXR/tinyexr.cpp
      ${THIRD_PARTY_DIR}/TinyEXR/tinyexr.h
 )
 add_library(TinyEXR STATIC ${THIRDPARTY_OSS_TINYEXR_FILES})
-source_group(ThirdParty\\TinyEXR FILES ${THIRDPARTY_OSS_TINYEXR_FILES})
 
 set(GAINPUT_STATIC_FILES
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gainput.cpp
@@ -205,8 +199,8 @@ set(GAINPUT_MACOS_FILES
 set(GAINPUT_IOS_FILES
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputIos.mm
 )
-source_group(ThirdParty\\GaInput FILES ${GAINPUT_STATIC_FILES})
-source_group(ThirdParty\\GaInput\\MacOS FILES ${GAINPUT_MACOS_FILES})
+source_group(Core FILES ${GAINPUT_STATIC_FILES})
+source_group(MacOS FILES ${GAINPUT_MACOS_FILES})
 if(${APPLE_PLATFORM} MATCHES ON) 
     set(GAINPUT_STATIC_FILES
         ${GAINPUT_STATIC_FILES}
@@ -214,9 +208,6 @@ if(${APPLE_PLATFORM} MATCHES ON)
     )
 endif()
 add_library(GaInput STATIC ${GAINPUT_STATIC_FILES})
-if (${APPLE_PLATFORM} MATCHES ON)
-    set_property (TARGET GaInput APPEND_STRING PROPERTY COMPILE_FLAGS "-fno-objc-arc")
-endif()
 
 set(OZZ_INCLUDES
     ${THIRD_PARTY_DIR}/ozz-animation/include
@@ -248,7 +239,7 @@ set(OZZ_BASE_FILES
     ${THIRD_PARTY_DIR}/ozz-animation/src/base/memory/allocator.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/base/platform.cc
 )
-source_group(ThirdParty\\Ozz\\Base FILES ${OZZ_BASE_FILES})
+source_group(Base FILES ${OZZ_BASE_FILES})
 set(OZZ_ANIMATION_FILES
     ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/ik_aim_job.h
     ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/ik_two_bone_job.h
@@ -275,7 +266,7 @@ set(OZZ_ANIMATION_FILES
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/runtime/track_triggering_job.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/runtime/track.cc
 )
-source_group(ThirdParty\\Ozz\\Animation\\runtime FILES ${OZZ_ANIMATION_FILES})
+source_group(Animation/runtime FILES ${OZZ_ANIMATION_FILES})
 set(OZZ_ANIMATION_OFFLINE_FILES
     ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/additive_animation_builder.h
     ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/animation_builder.h
@@ -300,7 +291,7 @@ set(OZZ_ANIMATION_OFFLINE_FILES
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/offline/track_builder.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/offline/track_optimizer.cc
 )
-source_group(ThirdParty\\Ozz\\Animation\\Offline FILES ${OZZ_ANIMATION_OFFLINE_FILES})
+source_group(Animation/Offline FILES ${OZZ_ANIMATION_OFFLINE_FILES})
 set(OZZ_FILES
     ${OZZ_BASE_FILES}
     ${OZZ_ANIMATION_FILES}
