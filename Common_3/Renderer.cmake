@@ -116,8 +116,6 @@ if(${APPLE_PLATFORM} MATCHES ON)
         ${APPLE_APPKIT}
         ${APPLE_IOKIT}
     )
-    
-    add_compile_options("-x objective-c++")
 endif()
 
 if(${WINDOWS} MATCHES ON)
