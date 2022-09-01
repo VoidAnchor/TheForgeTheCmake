@@ -206,6 +206,7 @@ if(${APPLE_PLATFORM} MATCHES ON)
         ${GAINPUT_STATIC_FILES}
         ${GAINPUT_MACOS_FILES}
     )
+    add_compile_options("-x objective-c++")
 endif()
 add_library(GaInput STATIC ${GAINPUT_STATIC_FILES})
 if (${APPLE_PLATFORM} MATCHES ON)
