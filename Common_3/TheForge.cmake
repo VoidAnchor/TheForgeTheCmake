@@ -41,8 +41,6 @@ target_include_directories(The-Forge PUBLIC
     ${RENDER_INCLUDES}
 )
 
-set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
-
 target_link_libraries(The-Forge PUBLIC ${RENDER_LIBRARIES} ${THIRD_PARTY_DEPS})
 
 target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
