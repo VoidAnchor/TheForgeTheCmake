@@ -48,6 +48,16 @@ target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
 target_compile_definitions(The-Forge PUBLIC ${RENDER_DEFINES})
 
 if (${APPLE_PLATFORM} MATCHES ON)
-    set_source_files_properties(${FORGE_FILES} PROPERTIES COMPILE_FLAGS "-x objective-c++")
+
+    macro (set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE)
+        set_property (TARGET ${TARGET} PROPERTY
+                XCODE_ATTRIBUTE_${XCODE_PROPERTY} ${XCODE_VALUE})
+    endmacro (set_xcode_property)
+
+    if (APPLE)
+        set_xcode_property(The-Forge CLANG_CXX_LANGUAGE_STANDARD "c++17")
+        set_xcode_property(The-Forge CLANG_CXX_LIBRARY "libc++")
+    endif (APPLE)
+
     target_compile_options(The-Forge PRIVATE "-fobjc-arc")
 endif()
