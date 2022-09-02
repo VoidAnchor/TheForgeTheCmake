@@ -4,11 +4,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 add_executable(Bootstrap main.cpp)
 target_link_libraries(Bootstrap The-Forge)
 
-if (APPLE)
+if (${APPLE_PLATFORM} MATCHES ON)
     set_xcode_property(Bootstrap CLANG_CXX_LANGUAGE_STANDARD "c++17")
     set_xcode_property(Bootstrap CLANG_CXX_LIBRARY "libc++")
-endif (APPLE)
-
+endif ()
 
 add_custom_command(TARGET Bootstrap POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Bootstrap> $<TARGET_FILE_DIR:Bootstrap>
