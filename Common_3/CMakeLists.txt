@@ -11,10 +11,6 @@ set(MIDDLEWARE_ECS_FILES
 
 set (CMAKE_CXX_STANDARD 17)
 
-if(${APPLE_PLATFORM} MATCHES ON)
-    add_compile_options(-x objective-c++)
-endif()
-
 include(SpirVTools.cmake)
 include(Dependencies.cmake)
 include(OS.cmake)

@@ -1,5 +1,3 @@
-set(CMAKE_CXX_STANDARD 17)
-
 set(THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/ThirdParty/OpenSource)
 
 add_library(WinPixEventRuntime SHARED IMPORTED)
@@ -209,6 +207,7 @@ if(${APPLE_PLATFORM} MATCHES ON)
 endif()
 add_library(GaInput STATIC ${GAINPUT_STATIC_FILES})
 if (${APPLE_PLATFORM} MATCHES ON)
+    set_source_files_properties(${GAINPUT_STATIC_FILES} PROPERTIES COMPILE_FLAGS "-x objective-c++")
     target_compile_options(GaInput PRIVATE "-fno-objc-arc")
 endif()
 

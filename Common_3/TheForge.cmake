@@ -48,5 +48,6 @@ target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
 target_compile_definitions(The-Forge PUBLIC ${RENDER_DEFINES})
 
 if (${APPLE_PLATFORM} MATCHES ON)
+    set_source_files_properties(${FORGE_FILES} PROPERTIES COMPILE_FLAGS "-x objective-c++")
     target_compile_options(The-Forge PRIVATE "-fobjc-arc")
 endif()
