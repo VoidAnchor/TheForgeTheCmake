@@ -4,7 +4,7 @@ A set of CMake files for The Forge's (formerly ConfettiFX) fantastic minimalisti
 # Current Status
 Still experimental.  I'm mostly modifying this for my own purposes.  PRs are certainly welcome though.
 
-* It's largely up to date with The Forge 1.51.  Tools and such are still being added.
+* It's largely up to date with The Forge 1.52.  Tools and such are still being added.
 * Right now I'm bouncing between macOS and Windows, Metal and Vulkan respectively.  I have not really tested DX11/DX12
 * Dependencies and the like could be better separated.  Right now they're all being tossed into a giant blob.
 
