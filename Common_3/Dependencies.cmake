@@ -177,6 +177,10 @@ set(GAINPUT_STATIC_FILES
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputAllocator.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gestures/GainputButtonStickGesture.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/dev/GainputDev.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/dev/GainputMemoryStream.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/dev/GainputNetAddress.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/dev/GainputNetConnection.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/dev/GainputNetListener.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gestures/GainputDoubleClickGesture.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gestures/GainputHoldGesture.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputInputDeltaState.cpp
@@ -193,18 +197,31 @@ set(GAINPUT_STATIC_FILES
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/recorder/GainputInputRecording.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputInputState.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputMapFilters.cpp
-     ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/dev/GainputMemoryStream.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gestures/GainputPinchGesture.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gestures/GainputRotateGesture.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gestures/GainputSimultaneouslyDownGesture.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/gestures/GainputTapGesture.cpp
+     ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/hid/GainputHID.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/hid/GainputHIDWhitelist.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/hid/hidparsers/HIDParserPS4Controller.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/hid/hidparsers/HIDParserPS5Controller.cpp
 )
+
+set(GAINPUT_WINDOWS_FILES
+    ${THIRD_PARTY_DIR}/gainput/lib/source/hidapi/windows/hid.c
+)
+
+set(GAINPUT_LINUX_FILES
+    ${THIRD_PARTY_DIR}/gainput/lib/source/hidapi/linux/hid.c
+)
+
 set(GAINPUT_MACOS_FILES
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputMac.mm
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/pad/GainputInputDevicePadMac.cpp
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/mouse/GainputInputDeviceMouseMac.mm
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/mouse/GainputInputDeviceMouseMacRaw.mm
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/keyboard/GainputInputDeviceKeyboardMac.cpp
+    ${THIRD_PARTY_DIR}/gainput/lib/source/hidapi/mac/hid.c
 )
 set(GAINPUT_IOS_FILES
      ${THIRD_PARTY_DIR}/gainput/lib/source/gainput/GainputIos.mm
@@ -218,8 +235,11 @@ if(${APPLE_PLATFORM} MATCHES ON)
     )
 endif()
 add_library(GaInput STATIC ${GAINPUT_STATIC_FILES})
+target_include_directories(GaInput PUBLIC ${THIRD_PARTY_DIR}/gainput/lib/include)
 if (${APPLE_PLATFORM} MATCHES ON)
-    set_source_files_properties(${GAINPUT_STATIC_FILES} PROPERTIES COMPILE_FLAGS "-x objective-c++")
+    #set_source_files_properties(${GAINPUT_STATIC_FILES} PROPERTIES COMPILE_FLAGS "-x objective-c++")
+    set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++17 -stdlib=libc++ -x objective-c++")
+    set_property(TARGET GaInput PROPERTY C_STANDARD 17)
     target_compile_options(GaInput PRIVATE "-fno-objc-arc")
 endif()
 
