@@ -15,15 +15,27 @@ set_property(TARGET AGS PROPERTY IMPORTED_LOCATION
 set_property(TARGET AGS PROPERTY IMPORTED_IMPLIB
     ${THIRD_PARTY_DIR}/ags/ags_lib/lib/amd_ags_x64.lib
 )
+target_include_directories(AGS INTERFACE ${THIRD_PARTY_DIR}/ags)
 
 add_library(Nvapi STATIC IMPORTED)
 set_property(TARGET Nvapi PROPERTY IMPORTED_LOCATION
     ${THIRD_PARTY_DIR}/nvapi/amd64/nvapi64.lib
 )
+target_include_directories(Nvapi INTERFACE ${THIRD_PARTY_DIR}/nvapi)
 
 add_library(DirectXShaderCompiler STATIC IMPORTED)
 set_property(TARGET DirectXShaderCompiler PROPERTY IMPORTED_LOCATION
     ${THIRD_PARTY_DIR}/DirectXShaderCompiler/lib/x64/dxcompiler.lib
+)
+
+add_library(VulkanMemoryAllocator INTERFACE)
+target_include_directories(VulkanMemoryAllocator INTERFACE
+    ${THIRD_PARTY_DIR}/VulkanMemoryAllocator
+)
+
+add_library(D3D12MemoryAllocator INTERFACE)
+target_include_directories(D3D12MemoryAllocator INTERFACE
+    ${THIRD_PARTY_DIR}/D3D12MemoryAllocator
 )
 
 set(BASISU_FILES
