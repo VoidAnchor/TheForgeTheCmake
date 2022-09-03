@@ -5,8 +5,7 @@ add_executable(Bootstrap main.cpp)
 target_link_libraries(Bootstrap The-Forge)
 
 if (${APPLE_PLATFORM} MATCHES ON)
-    set_xcode_property(Bootstrap CLANG_CXX_LANGUAGE_STANDARD "c++17")
-    set_xcode_property(Bootstrap CLANG_CXX_LIBRARY "libc++")
+    set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -std=c++17 -stdlib=libc++")
 endif ()
 
 add_custom_command(TARGET Bootstrap POST_BUILD
