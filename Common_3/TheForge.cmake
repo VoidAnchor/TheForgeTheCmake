@@ -1,5 +1,3 @@
-project(The-Forge)
-
 # Handle library creation here.
 
 set(FORGE_FILES
@@ -38,13 +36,19 @@ else()
     )
 endif()
 
+target_include_directories(The-Forge PUBLIC
+    ../The-Forge/Common_3/
+    ${RENDER_INCLUDES}
+)
 
-set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
+target_link_libraries(The-Forge PUBLIC ${RENDER_LIBRARIES} ${THIRD_PARTY_DEPS})
 
-target_link_libraries(The-Forge PUBLIC The-Forge-Dependencies ozz_animation ${GLOBAL_LIBRARIES} ${RENDER_LIBRARIES})
+target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
 
-target_compile_definitions(The-Forge PUBLIC ${GLOBAL_DEFINES})
+target_compile_definitions(The-Forge PUBLIC ${RENDER_DEFINES})
 
 if (${APPLE_PLATFORM} MATCHES ON)
-    set_property (TARGET The-Forge APPEND_STRING PROPERTY COMPILE_FLAGS "-fobjc-arc")
+    set_xcode_property(The-Forge CLANG_CXX_LANGUAGE_STANDARD "c++17")
+    set_xcode_property(The-Forge CLANG_CXX_LIBRARY "libc++")
+    target_compile_options(The-Forge PRIVATE "-fobjc-arc")
 endif()

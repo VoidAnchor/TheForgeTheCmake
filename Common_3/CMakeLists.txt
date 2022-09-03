@@ -9,9 +9,12 @@ set(MIDDLEWARE_ECS_FILES
     ../The-Forge/Middleware_3/ECS/EntityManager.h
 )
 
-link_directories(${GLOBAL_LIBRARY_PATHS})
- 
-include(ozz.cmake)
+set(CMAKE_CXX_STANDARD 17)
+# Fix behavior of CMAKE_CXX_STANDARD when targeting macOS.
+if (POLICY CMP0025)
+    cmake_policy(SET CMP0025 NEW)
+endif ()
+
 include(SpirVTools.cmake)
 include(Dependencies.cmake)
 include(OS.cmake)

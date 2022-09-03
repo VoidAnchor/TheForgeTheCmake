@@ -1,4 +1,5 @@
 [Bb]uild
+out
 *.exe
 *.so
 *.dll
@@ -6,6 +7,7 @@
 *.lib
 *.app
 .vscode
+.vs
 .DS_Store
 .idea
 cmake-build*
