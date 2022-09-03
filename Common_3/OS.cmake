@@ -25,6 +25,7 @@ set(OS_CORE_FILES
     ../The-Forge/Common_3/OS/Core/ThreadSystem.h
     ../The-Forge/Common_3/OS/Core/Timer.c
     ../The-Forge/Common_3/OS/Core/UnixThreadID.h
+    ../The-Forge/Common_3/OS/Core/CPUConfig.cpp
 )
 
 set(OS_FILESYSTEM_FILES
@@ -35,6 +36,7 @@ set(OS_FILESYSTEM_FILES
 
 set(OS_FONT_FILES
     ../The-Forge/Common_3/OS/Fonts/FontSystem.cpp
+    ../The-Forge/Common_3/OS/Fonts/stbtt.cpp
 )
 
 set(OS_FONT_SHADER_FILES
@@ -150,6 +152,7 @@ set(OS_MACOS_FILES
     ../The-Forge/Common_3/OS/Darwin/macOSBase.mm
     ../The-Forge/Common_3/OS/Darwin/macOSAppDelegate.m
     ../The-Forge/Common_3/OS/Darwin/macOSAppDelegate.h
+    ../The-Forge/Common_3/OS/Darwin/macOSWindow.mm
 )
 
 set(OS_UTILS_FILES
@@ -178,6 +181,9 @@ set(OS_MIDDLEWARE_PARALLEL_PRIMS_FILES
     ../The-Forge/Middleware_3/ParallelPrimitives/ParallelPrimitives.h
 )
 
+set(OS_WINDOWSYSTEM_FILES
+    ../The-Forge/Common_3/OS/WindowSystem/WindowSystem.cpp
+)
 
 set(OS_PLATFORM_SPECIFIC_FILES "")
 
@@ -195,6 +201,7 @@ source_group(OS\\Profiler FILES ${OS_PROFILER_FILES})
 source_group(OS\\Scripting FILES ${OS_SCRIPTING_FILES})
 source_group(OS\\UI FILES ${OS_UI_FILES})
 source_group(OS\\UI\\Shaders FILES ${OS_UI_SHADER_FILES})
+source_group(OS\\WindowSystem FILES ${OS_WINDOWSYSTEM_FILES})
 source_group(Middleware_3\\Animation FILES ${OS_MIDDLEWARE_ANIMATION_FILES})
 source_group(Middleware_3\\ParallelPrimitives FILES ${OS_MIDDLEWARE_PARALLEL_PRIMS_FILES})
 

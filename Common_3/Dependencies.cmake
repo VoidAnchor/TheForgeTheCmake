@@ -223,6 +223,13 @@ if (${APPLE_PLATFORM} MATCHES ON)
     target_compile_options(GaInput PRIVATE "-fno-objc-arc")
 endif()
 
+set(CPU_FEATURES_FILES
+    ${THIRD_PARTY_DIR}/cpu_features/src/impl_x86_macos.c
+    ${THIRD_PARTY_DIR}/cpu_features/src/impl_aarch64_iOS.c
+)
+
+add_library(cpu_features STATIC ${CPU_FEATURES_FILES})
+
 set(OZZ_INCLUDES
     ${THIRD_PARTY_DIR}/ozz-animation/include
 )
@@ -325,4 +332,5 @@ set(THIRD_PARTY_DEPS
     TinyEXR
     GaInput
     Ozz
+    cpu_features
 )
