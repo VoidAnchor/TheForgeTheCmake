@@ -9,18 +9,9 @@ set(RENDERER_SOURCE_FILES
 )
 
 set(RENDERER_INCLUDE_FILES
-    ${RENDERER_DIR}/IRay.h
-    ${RENDERER_DIR}/IRenderer.h
-    ${RENDERER_DIR}/IResourceLoader.h
-    ${RENDERER_DIR}/IShaderReflection.h
 )
 
 set(METAL_FILES
-    ${RENDERER_DIR}/Metal/MetalAvailabilityMacros.h
-    ${RENDERER_DIR}/Metal/MetalCapBuilder.h
-    ${RENDERER_DIR}/Metal/MetalConfig.h
-    ${RENDERER_DIR}/Metal/MetalMemoryAllocator.h
-    ${RENDERER_DIR}/Metal/MetalMemoryAllocatorImpl.h
     ${RENDERER_DIR}/Metal/MetalRaytracing.mm
     ${RENDERER_DIR}/Metal/MetalRenderer.mm
     ${RENDERER_DIR}/Metal/MetalShaderReflection.mm
@@ -28,30 +19,23 @@ set(METAL_FILES
 
 set(RENDER_QUEST_FILES
     ${RENDERER_DIR}/Quest/VrApiHooks.cpp
-    ${RENDERER_DIR}/Quest/VrApiHooks.h
 )
 
 set(DX11_FILES
     ${RENDERER_DIR}/Direct3D11/Direct3D11.cpp
-    ${RENDERER_DIR}/Direct3D11/Direct3D11CapBuilder.h
-    ${RENDERER_DIR}/Direct3D11/Direct3D11Config.h
     ${RENDERER_DIR}/Direct3D11/Direct3D11Raytracing.cpp
     ${RENDERER_DIR}/Direct3D11/Direct3D11ShaderReflection.cpp
 )
 
 set(DX12_FILES
     ${RENDERER_DIR}/Direct3D12/Direct3D12.cpp
-    ${RENDERER_DIR}/Direct3D12/Direct3D12CapBuilder.h
     ${RENDERER_DIR}/Direct3D12/Direct3D12Hooks.cpp
-    ${RENDERER_DIR}/Direct3D12/Direct3D12Hooks.h
     ${RENDERER_DIR}/Direct3D12/Direct3D12Raytracing.cpp
     ${RENDERER_DIR}/Direct3D12/Direct3D12ShaderReflection.cpp
 )
 
 set(VULKAN_FILES
     ${RENDERER_DIR}/Vulkan/Vulkan.cpp
-    ${RENDERER_DIR}/Vulkan/VulkanCapsBuilder.h
-    ${RENDERER_DIR}/Vulkan/VulkanConfig.h
     ${RENDERER_DIR}/Vulkan/VulkanRaytracing.cpp
     ${RENDERER_DIR}/Vulkan/VulkanShaderReflection.cpp
 )

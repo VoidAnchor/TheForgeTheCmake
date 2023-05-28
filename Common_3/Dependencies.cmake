@@ -43,29 +43,20 @@ set(BASISU_FILES
 )
 add_library(Basisu STATIC ${BASISU_FILES})
 
-set(EASTL_FILES
-     ${THIRD_PARTY_DIR}/EASTL/assert.cpp
-     ${THIRD_PARTY_DIR}/EASTL/allocator_forge.cpp
-     ${THIRD_PARTY_DIR}/EASTL/fixed_pool.cpp
-     ${THIRD_PARTY_DIR}/EASTL/hashtable.cpp
-     ${THIRD_PARTY_DIR}/EASTL/intrusive_list.cpp
-     ${THIRD_PARTY_DIR}/EASTL/numeric_limits.cpp
-     ${THIRD_PARTY_DIR}/EASTL/red_black_tree.cpp
-     ${THIRD_PARTY_DIR}/EASTL/string.cpp
-     ${THIRD_PARTY_DIR}/EASTL/thread_support.cpp
-     ${THIRD_PARTY_DIR}/EASTL/EAStdC/EAMemory.cpp
-     ${THIRD_PARTY_DIR}/EASTL/EAStdC/EASprintf.cpp
+include(FetchContent)
+
+FetchContent_Declare(
+        eastl
+        GIT_REPOSITORY https://github.com/electronicarts/EASTL.git
+        GIT_TAG        3.18.00
 )
-add_library(Eastl STATIC ${EASTL_FILES})
+FetchContent_MakeAvailable(eastl)
 
 set(IMGUI_FILES
-     ${THIRD_PARTY_DIR}/imgui/imconfig.h
      ${THIRD_PARTY_DIR}/imgui/imgui_demo.cpp
      ${THIRD_PARTY_DIR}/imgui/imgui_draw.cpp
-     ${THIRD_PARTY_DIR}/imgui/imgui_internal.h
      ${THIRD_PARTY_DIR}/imgui/imgui_widgets.cpp
      ${THIRD_PARTY_DIR}/imgui/imgui.cpp
-     ${THIRD_PARTY_DIR}/imgui/imgui.h
 )
 add_library(Imgui STATIC ${IMGUI_FILES})
 
@@ -107,35 +98,19 @@ set(LUA_FILES
 add_library(Lua STATIC ${LUA_FILES})
 
 set(MINIZIP_FILES
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/aes.h
      ${THIRD_PARTY_DIR}/minizip/lib/brg/aescrypt.c
      ${THIRD_PARTY_DIR}/minizip/lib/brg/aeskey.c
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/aesopt.h
      ${THIRD_PARTY_DIR}/minizip/lib/brg/aestab.c
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/aestab.h
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/brg_endian.h
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/brg_types.h
      ${THIRD_PARTY_DIR}/minizip/lib/brg/hmac.c
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/hmac.h
      ${THIRD_PARTY_DIR}/minizip/lib/brg/sha1.c
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/sha1.h
      ${THIRD_PARTY_DIR}/minizip/lib/brg/sha2.c
-     ${THIRD_PARTY_DIR}/minizip/lib/brg/sha2.h
-     ${THIRD_PARTY_DIR}/zip/miniz.h
-     ${THIRD_PARTY_DIR}/minizip/mz.h
      ${THIRD_PARTY_DIR}/minizip/mz_crypt.c
-     ${THIRD_PARTY_DIR}/minizip/mz_crypt.h
      ${THIRD_PARTY_DIR}/minizip/mz_crypt_brg.c
      ${THIRD_PARTY_DIR}/minizip/mz_os.cpp
-     ${THIRD_PARTY_DIR}/minizip/mz_os.h
-     ${THIRD_PARTY_DIR}/minizip/mz_strm.h
      ${THIRD_PARTY_DIR}/minizip/mz_strm_raw.c
      ${THIRD_PARTY_DIR}/minizip/mz_strm_wzaes.c
-     ${THIRD_PARTY_DIR}/minizip/mz_strm_wzaes.h
      ${THIRD_PARTY_DIR}/minizip/mz_strm_zlib.c
-     ${THIRD_PARTY_DIR}/minizip/mz_strm_zlib.h
      ${THIRD_PARTY_DIR}/minizip/mz_zip.c
-     ${THIRD_PARTY_DIR}/minizip/mz_zip.h
 )
 add_library(MiniZip STATIC ${MINIZIP_FILES})
 
@@ -152,7 +127,6 @@ set(MESHOPTIMIZER_FILES
      ${THIRD_PARTY_DIR}/meshoptimizer/src/clusterizer.cpp
      ${THIRD_PARTY_DIR}/meshoptimizer/src/indexcodec.cpp
      ${THIRD_PARTY_DIR}/meshoptimizer/src/indexgenerator.cpp
-     ${THIRD_PARTY_DIR}/meshoptimizer/src/meshoptimizer.h
      ${THIRD_PARTY_DIR}/meshoptimizer/src/overdrawanalyzer.cpp
      ${THIRD_PARTY_DIR}/meshoptimizer/src/overdrawoptimizer.cpp
      ${THIRD_PARTY_DIR}/meshoptimizer/src/simplifier.cpp
@@ -168,7 +142,6 @@ add_library(MeshOptimizer STATIC ${MESHOPTIMIZER_FILES})
 
 set(THIRDPARTY_OSS_TINYEXR_FILES
      ${THIRD_PARTY_DIR}/TinyEXR/tinyexr.cpp
-     ${THIRD_PARTY_DIR}/TinyEXR/tinyexr.h
 )
 add_library(TinyEXR STATIC ${THIRDPARTY_OSS_TINYEXR_FILES})
 
@@ -254,24 +227,6 @@ set(OZZ_INCLUDES
     ${THIRD_PARTY_DIR}/ozz-animation/include
 )
 set(OZZ_BASE_FILES
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/containers/map.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/containers/set.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/containers/string.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/containers/string_archive.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/containers/vector.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/containers/vector_archive.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/endianness.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/gtest_helper.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/io/archive.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/io/archive_traits.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/maths/gtest_math_helper.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/maths/math_archive.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/maths/math_constant.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/maths/math_ex.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/maths/simd_math_archive.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/maths/soa_math_archive.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/memory/allocator.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/base/platform.h
     ${THIRD_PARTY_DIR}/ozz-animation/src/base/containers/string_archive.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/base/io/archive.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/base/maths/math_archive.cc
@@ -282,19 +237,6 @@ set(OZZ_BASE_FILES
 )
 source_group(Base FILES ${OZZ_BASE_FILES})
 set(OZZ_ANIMATION_FILES
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/ik_aim_job.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/ik_two_bone_job.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/animation.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/blending_job.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/local_to_model_job.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/sampling_job.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/skeleton.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/skeleton_utils.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/track.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/track_sampling_job.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/track_triggering_job.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/runtime/track_triggering_job_stl.h
-    ${THIRD_PARTY_DIR}/ozz-animation/src/animation/runtime/animation_keyframe.h
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/runtime/animation.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/runtime/blending_job.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/runtime/ik_aim_job.cc
@@ -309,16 +251,6 @@ set(OZZ_ANIMATION_FILES
 )
 source_group(Animation/runtime FILES ${OZZ_ANIMATION_FILES})
 set(OZZ_ANIMATION_OFFLINE_FILES
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/additive_animation_builder.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/animation_builder.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/animation_optimizer.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/raw_animation_utils.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/raw_animation.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/raw_skeleton.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/raw_track.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/skeleton_builder.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/track_builder.h
-    ${THIRD_PARTY_DIR}/ozz-animation/include/ozz/animation/offline/track_optimizer.h
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/offline/additive_animation_builder.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/offline/animation_builder.cc
     ${THIRD_PARTY_DIR}/ozz-animation/src/animation/offline/animation_optimizer.cc
@@ -343,7 +275,7 @@ target_include_directories(Ozz PUBLIC ${OZZ_INCLUDES})
 
 set(THIRD_PARTY_DEPS
     Basisu
-    Eastl
+    EASTL
     Imgui
     Lua
     MiniZip
