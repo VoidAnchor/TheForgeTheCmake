@@ -43,14 +43,20 @@ set(BASISU_FILES
 )
 add_library(Basisu STATIC ${BASISU_FILES})
 
-include(FetchContent)
-
-FetchContent_Declare(
-        eastl
-        GIT_REPOSITORY https://github.com/electronicarts/EASTL.git
-        GIT_TAG        3.18.00
+set(EASTL_FILES
+     ${THIRD_PARTY_DIR}/EASTL/assert.cpp
+     ${THIRD_PARTY_DIR}/EASTL/allocator_forge.cpp
+     ${THIRD_PARTY_DIR}/EASTL/fixed_pool.cpp
+     ${THIRD_PARTY_DIR}/EASTL/hashtable.cpp
+     ${THIRD_PARTY_DIR}/EASTL/intrusive_list.cpp
+     ${THIRD_PARTY_DIR}/EASTL/numeric_limits.cpp
+     ${THIRD_PARTY_DIR}/EASTL/red_black_tree.cpp
+     ${THIRD_PARTY_DIR}/EASTL/string.cpp
+     ${THIRD_PARTY_DIR}/EASTL/thread_support.cpp
+     ${THIRD_PARTY_DIR}/EASTL/EAStdC/EAMemory.cpp
+     ${THIRD_PARTY_DIR}/EASTL/EAStdC/EASprintf.cpp
 )
-FetchContent_MakeAvailable(eastl)
+add_library(Eastl STATIC ${EASTL_FILES})
 
 set(IMGUI_FILES
      ${THIRD_PARTY_DIR}/imgui/imgui_demo.cpp
@@ -275,7 +281,7 @@ target_include_directories(Ozz PUBLIC ${OZZ_INCLUDES})
 
 set(THIRD_PARTY_DEPS
     Basisu
-    EASTL
+    Eastl
     Imgui
     Lua
     MiniZip
