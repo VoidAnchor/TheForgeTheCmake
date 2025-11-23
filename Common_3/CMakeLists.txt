@@ -1,24 +1,18 @@
-# Dependencies
-
-set(MIDDLEWARE_ECS_FILES
-    ../The-Forge/Middleware_3/ECS/BaseComponent.cpp
-    ../The-Forge/Middleware_3/ECS/BaseComponent.h
-    ../The-Forge/Middleware_3/ECS/ComponentRepresentation.cpp
-    ../The-Forge/Middleware_3/ECS/ComponentRepresentation.h
-    ../The-Forge/Middleware_3/ECS/EntityManager.cpp
-    ../The-Forge/Middleware_3/ECS/EntityManager.h
-)
+# Common_3 CMakeLists.txt - The-Forge v1.60+
 
 set(CMAKE_CXX_STANDARD 17)
-# Fix behavior of CMAKE_CXX_STANDARD when targeting macOS.
-if (POLICY CMP0025)
-    cmake_policy(SET CMP0025 NEW)
-endif ()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include(SpirVTools.cmake)
+# Fix behavior of CMAKE_CXX_STANDARD when targeting macOS
+if(POLICY CMP0025)
+    cmake_policy(SET CMP0025 NEW)
+endif()
+
+# Include all module definitions
 include(Dependencies.cmake)
 include(OS.cmake)
+include(Utilities.cmake)
+include(Application.cmake)
+include(Game.cmake)
 include(Renderer.cmake)
 include(TheForge.cmake)
-include(AssetPipeline.cmake)
-  
