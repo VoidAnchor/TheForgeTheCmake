@@ -2,129 +2,73 @@ cmake_minimum_required(VERSION 3.15)
 
 project(The-Forge)
 
-# Do some OS checks, and setup accordingly.
+# Platform detection
 set(APPLE_PLATFORM OFF)
 set(LINUX OFF)
 set(WINDOWS OFF)
-
-# On macOS, we always set Metal support to on.
 set(METAL OFF)
 
-# Make our APIs into options
-option(DX12 "DirectX12 (Windows only)" OFF)
-option(DX11 "DirectX11 (Windows only)" OFF)
-option(EXAMPLES "The Forge examples" OFF)
-option(VULKAN "Vulkan" OFF)
-option(DYNAMIC_LIB "Dynamic Library" OFF)
-
-set(ASSIMP OFF)
-set(OZZ OFF)
-
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    message("Apple platform detected. Generating macOS and iOS targets.")
+if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    message(STATUS "Apple platform detected")
     set(APPLE_PLATFORM ON)
+    set(METAL ON)
 endif()
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    message("Linux detected. Generating Linux targets.")
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    message(STATUS "Linux platform detected")
     set(LINUX ON)
     set(VULKAN ON)
 endif()
 
-if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-    message("Windows detected. Generating Windows targets.")
+if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    message(STATUS "Windows platform detected")
     set(WINDOWS ON)
 endif()
 
+# API options
+option(DX12 "DirectX 12 (Windows only)" OFF)
+option(VULKAN "Vulkan" OFF)
+option(EXAMPLES "Build The Forge examples" OFF)
+option(DYNAMIC_LIB "Build as dynamic library" OFF)
 
-# Setup some sane API defaults.
-set(API_SELECTED ON)
-
-if(${VULKAN} MATCHES OFF)
-    if(${DX11} MATCHES OFF)
-        if(${DX12} MATCHES OFF)
-            if(${METAL} MATCHES OFF)
-                set(API_SELECTED OFF)
-            endif()
-        endif()
-    endif()
-endif()
-
-# Apple platforms should always default to Metal.
-if (${APPLE_PLATFORM} MATCHES ON)
-    if(${METAL} MATCHES OFF)
+# Set API defaults if none specified
+if(NOT DX12 AND NOT VULKAN AND NOT METAL)
+    if(APPLE_PLATFORM)
         set(METAL ON)
-    endif()
-
-    if(${VULKAN} MATCHES ON)
-        set(VULKAN OFF)
-    endif()
-
-    if(${DX11} MATCHES ON)
-        set(DX11 OFF)
-    endif()
-
-    if(${DX12} MATCHES ON)
-        set(DX12 OFF)
-    endif()
-
-    set(API_SELECTED ON)
-endif()
-
-if (${API_SELECTED} MATCHES OFF)
-    if(${APPLE_PLATFORM} MATCHES ON)
-        set(METAL ON)
-    endif()
-
-    if(${LINUX} MATCHES ON)
+    elseif(LINUX)
         set(VULKAN ON)
-    endif()
-
-    if(${WINDOWS} MATCHES ON)
+    elseif(WINDOWS)
         set(DX12 ON)
-        # Needed due to how the profiler in forge force-links to vulkan as well.
-        set(VULKAN ON)
+        set(VULKAN ON)  # Profiler links to Vulkan
     endif()
 endif()
 
-if(${DX12} MATCHES ON)
-    set(DX11 ON)
+# Apple always uses Metal
+if(APPLE_PLATFORM)
+    set(METAL ON)
+    set(VULKAN OFF)
+    set(DX12 OFF)
 endif()
 
-message("The following options have been set to on:\n")
-if(${APPLE_PLATFORM} MATCHES ON)
-    message("Apple platform")
+# Print configuration
+message(STATUS "")
+message(STATUS "The-Forge Configuration:")
+message(STATUS "  Platform: ${CMAKE_SYSTEM_NAME}")
+if(METAL)
+    message(STATUS "  API: Metal")
 endif()
-
-if(${LINUX} MATCHES ON)
-    message("Linux platform")
+if(VULKAN)
+    message(STATUS "  API: Vulkan")
 endif()
-
-if(${WINDOWS} MATCHES ON)
-    message("Windows platform")
+if(DX12)
+    message(STATUS "  API: DirectX 12")
 endif()
-
-if(${METAL} MATCHES ON)
-    message("Metal reendering API")
+if(DYNAMIC_LIB)
+    message(STATUS "  Library: Dynamic")
+else()
+    message(STATUS "  Library: Static")
 endif()
-
-if(${VULKAN} MATCHES ON)
-    message("Vulkan rendering API")
-endif()
-
-if(${DX11} MATCHES ON)
-    message("DirectX 11 rendering API")
-endif()
-
-if(${DX12} MATCHES ON)
-    message("DirectX 12 rendering API")
-endif()
-
-if(${DYNAMIC_LIB} MATCHES ON)
-    message("Dynamic library")
-endif()
-
-message("\n")
+message(STATUS "")
 
 add_subdirectory(Common_3)
 add_subdirectory(Examples_3)

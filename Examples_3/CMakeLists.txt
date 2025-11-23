@@ -1,5 +1,6 @@
 add_subdirectory(Bootstrap)
+add_subdirectory(Visibility_Buffer)
 
-IF(${EXAMPLES} MATCHES ON)
+if(EXAMPLES)
     add_subdirectory(Unit_tests)
-ENDIF()
+endif()
