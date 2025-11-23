@@ -71,7 +71,7 @@ add_executable(Visibility_Buffer WIN32
     ${VB_SHADERS}
 )
 
-target_link_libraries(Visibility_Buffer The-Forge)
+target_link_libraries(Visibility_Buffer Renderer OS)
 set_property(TARGET Visibility_Buffer PROPERTY CXX_STANDARD 17)
 
 # Set Visual Studio debugger working directory to output folder

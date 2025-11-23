@@ -1,7 +1,7 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
 
 add_executable(Bootstrap main.cpp)
-target_link_libraries(Bootstrap The-Forge)
+target_link_libraries(Bootstrap Renderer OS)
 set_property(TARGET Bootstrap PROPERTY CXX_STANDARD 17)
 
 # Allow duplicate symbols from dxguid.lib

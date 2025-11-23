@@ -30,7 +30,9 @@ set(RENDERER_PARTICLE_FILES
 
 set(RENDERER_VISBUFFER_FILES
     ${RENDERER_DIR}/VisibilityBuffer/VisibilityBuffer.cpp
+    ${RENDERER_DIR}/VisibilityBuffer2/VisibilityBuffer2.cpp
     ${RENDERER_DIR}/Interfaces/IVisibilityBuffer.h
+    ${RENDERER_DIR}/Interfaces/IVisibilityBuffer2.h
 )
 
 # Tools

@@ -1,26 +1,7 @@
 # TheForge.cmake - The-Forge v1.60+
-# Main library creation
+# Creates OS and Renderer libraries
 
-# Combine all source files
-set(FORGE_FILES
-    ${RENDERER_SOURCE_FILES}
-    ${RENDERER_FILES}
-    ${OS_FILES}
-    ${APPLICATION_FILES}
-    ${UTILITIES_FILES}
-    ${GAME_FILES}
-    ${ANIMATION_FILES}
-)
-
-# Create library
-if(DYNAMIC_LIB)
-    add_library(The-Forge SHARED ${FORGE_FILES})
-else()
-    add_library(The-Forge STATIC ${FORGE_FILES})
-endif()
-
-# Include directories
-target_include_directories(The-Forge PUBLIC
+set(FORGE_INCLUDES
     ../The-Forge/Common_3/
     ../The-Forge/Common_3/Application/
     ../The-Forge/Common_3/Application/Interfaces/
@@ -42,38 +23,26 @@ target_include_directories(The-Forge PUBLIC
     ${RENDER_INCLUDES}
 )
 
-# Link libraries
-target_link_libraries(The-Forge PUBLIC 
-    ${RENDER_LIBRARIES} 
-    ${THIRD_PARTY_DEPS}
-)
-
-# Link directories
-target_link_directories(The-Forge PUBLIC ${RENDER_LIBRARY_PATHS})
-
-# Compile definitions
-target_compile_definitions(The-Forge PUBLIC ${RENDER_DEFINES})
-
-# D3D12 Agility SDK version
-if(DX12)
-    target_compile_definitions(The-Forge PUBLIC D3D12_AGILITY_SDK_VERSION=715)
-endif()
-
-# C++ standard
-set_property(TARGET The-Forge PROPERTY CXX_STANDARD 17)
-
-# Platform-specific settings
-if(APPLE_PLATFORM)
-    target_compile_options(The-Forge PRIVATE "-fobjc-arc")
-    set_source_files_properties(
-        ${OS_DARWIN_FILES} ${OS_MACOS_FILES}
-        PROPERTIES COMPILE_FLAGS "-x objective-c++"
-    )
-endif()
-
+# OS library
+add_library(OS STATIC ${OS_FILES} ${APPLICATION_FILES} ${UTILITIES_FILES} ${GAME_FILES} ${ANIMATION_FILES})
+target_include_directories(OS PUBLIC ${FORGE_INCLUDES})
+target_link_libraries(OS PUBLIC ${THIRD_PARTY_DEPS})
+target_compile_definitions(OS PUBLIC ${RENDER_DEFINES})
+set_property(TARGET OS PROPERTY CXX_STANDARD 17)
 if(WINDOWS)
-    target_compile_definitions(The-Forge PRIVATE
-        _CRT_SECURE_NO_WARNINGS
-        _CRT_NONSTDC_NO_DEPRECATE
-    )
+    target_compile_definitions(OS PRIVATE _CRT_SECURE_NO_WARNINGS _CRT_NONSTDC_NO_DEPRECATE)
+endif()
+
+# Renderer library
+add_library(Renderer STATIC ${RENDERER_SOURCE_FILES} ${RENDERER_FILES})
+target_include_directories(Renderer PUBLIC ${FORGE_INCLUDES})
+target_link_libraries(Renderer PUBLIC ${RENDER_LIBRARIES})
+target_link_directories(Renderer PUBLIC ${RENDER_LIBRARY_PATHS})
+target_compile_definitions(Renderer PUBLIC ${RENDER_DEFINES})
+set_property(TARGET Renderer PROPERTY CXX_STANDARD 17)
+if(DX12)
+    target_compile_definitions(Renderer PUBLIC D3D12_AGILITY_SDK_VERSION=715)
+endif()
+if(WINDOWS)
+    target_compile_definitions(Renderer PRIVATE _CRT_SECURE_NO_WARNINGS _CRT_NONSTDC_NO_DEPRECATE)
 endif()

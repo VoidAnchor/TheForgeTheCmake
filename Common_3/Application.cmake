@@ -43,8 +43,6 @@ set(APP_SCREENSHOT_FILES
 # UI
 set(APP_UI_FILES
     ${APP_DIR}/UI/UI.cpp
-    ${APP_DIR}/UI/imgui_user.cpp
-    ${APP_DIR}/UI/imgui_user.h
 )
 
 # Third party - imgui

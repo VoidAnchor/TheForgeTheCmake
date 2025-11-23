@@ -16,7 +16,6 @@ set(UTIL_INTERFACES_FILES
 # FileSystem
 set(UTIL_FILESYSTEM_FILES
     ${UTIL_DIR}/FileSystem/FileSystem.c
-    ${UTIL_DIR}/FileSystem/ToolFileSystem.c
     
 )
 
@@ -80,8 +79,6 @@ set(UTIL_LZ4_DIR ${UTIL_DIR}/ThirdParty/OpenSource/lz4)
 set(UTIL_LZ4_FILES
     ${UTIL_LZ4_DIR}/lz4.c
     ${UTIL_LZ4_DIR}/lz4.h
-    ${UTIL_LZ4_DIR}/lz4hc.c
-    ${UTIL_LZ4_DIR}/lz4hc.h
 )
 
 # Third party - zstd (decompression only to match official project)
