@@ -7,7 +7,7 @@ set(FORGE_COMMON ${FORGE_ROOT}/Common_3)
 
 set(BOOTSTRAP_SOURCES main.cpp)
 
-if(APPLE)
+if(TARGET_MACOS)
     # macOSAppDelegate.m is compiled in each example
     set(BOOTSTRAP_MACOS_DELEGATE ${FORGE_COMMON}/OS/Darwin/macOSAppDelegate.m)
     set_source_files_properties(${BOOTSTRAP_MACOS_DELEGATE} PROPERTIES COMPILE_FLAGS "-fobjc-arc")
@@ -26,6 +26,29 @@ if(APPLE)
         MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu"
     )
     set(BOOTSTRAP_OUTPUT_DIR $<TARGET_BUNDLE_CONTENT_DIR:Bootstrap>/Resources)
+elseif(TARGET_IOS)
+    # iOSAppDelegate.m is compiled in each example (like macOS)
+    set(BOOTSTRAP_IOS_DELEGATE ${FORGE_COMMON}/OS/Darwin/iOSAppDelegate.m)
+    set_source_files_properties(${BOOTSTRAP_IOS_DELEGATE} PROPERTIES COMPILE_FLAGS "-fobjc-arc")
+
+    # LaunchScreen.storyboard for iOS
+    set(BOOTSTRAP_STORYBOARD ${FORGE_ROOT}/Examples_3/Build_Props/XCode/iOS/Base.lproj/LaunchScreen.storyboard)
+    set_source_files_properties(${BOOTSTRAP_STORYBOARD} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+    add_executable(Bootstrap MACOSX_BUNDLE ${BOOTSTRAP_SOURCES} ${BOOTSTRAP_IOS_DELEGATE} ${BOOTSTRAP_STORYBOARD})
+    set_target_properties(Bootstrap PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.The-Forge.Examples.Bootstrap"
+        MACOSX_BUNDLE_BUNDLE_NAME "Bootstrap"
+        MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+        MACOSX_BUNDLE_INFO_PLIST "${FORGE_ROOT}/Examples_3/Build_Props/XCode/iOS/Info.plist"
+        XCODE_ATTRIBUTE_TARGETED_DEVICE_FAMILY "1,2"
+        XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET "14.0"
+        XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
+        XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
+        XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "${CMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM}"
+    )
+    set(BOOTSTRAP_OUTPUT_DIR $<TARGET_BUNDLE_CONTENT_DIR:Bootstrap>)
 else()
     add_executable(Bootstrap WIN32 ${BOOTSTRAP_SOURCES})
     set(BOOTSTRAP_OUTPUT_DIR $<TARGET_FILE_DIR:Bootstrap>)
@@ -36,7 +59,7 @@ set_property(TARGET Bootstrap PROPERTY CXX_STANDARD 17)
 set_property(TARGET Bootstrap PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${BOOTSTRAP_OUTPUT_DIR}")
 
 # On Apple platforms, main.cpp needs OBJCXX with ARC
-if(APPLE)
+if(APPLE_PLATFORM)
     set_source_files_properties(main.cpp PROPERTIES LANGUAGE OBJCXX COMPILE_FLAGS "-fobjc-arc")
 endif()
 
@@ -61,7 +84,7 @@ if(WIN32)
 endif()
 
 # Copy resources
-if(APPLE)
+if(TARGET_MACOS)
     add_custom_command(TARGET Bootstrap POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/../PathStatement.CMake.MacOS.txt" "${BOOTSTRAP_OUTPUT_DIR}/PathStatement.txt"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FORGE_COMMON}/OS/Darwin/apple_gpu.data" "${BOOTSTRAP_OUTPUT_DIR}/gpu.data"
@@ -70,6 +93,22 @@ if(APPLE)
         COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Debug"
         COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Scripts"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_COMMON}/Scripts" "${BOOTSTRAP_OUTPUT_DIR}/Scripts"
+    )
+elseif(TARGET_IOS)
+    # iOS apps are sandboxed - ALL assets must be bundled
+    add_custom_command(TARGET Bootstrap POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/../PathStatement.CMake.iOS.txt" "${BOOTSTRAP_OUTPUT_DIR}/PathStatement.txt"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FORGE_COMMON}/OS/Darwin/apple_gpu.data" "${BOOTSTRAP_OUTPUT_DIR}/gpu.data"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/PipelineCaches"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Screenshots"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Debug"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Scripts"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_COMMON}/Scripts" "${BOOTSTRAP_OUTPUT_DIR}/Scripts"
+        # Bundle all required Art assets for iOS
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Fonts"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Fonts" "${BOOTSTRAP_OUTPUT_DIR}/Fonts"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Textures"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Textures/dds" "${BOOTSTRAP_OUTPUT_DIR}/Textures"
     )
 else()
     add_custom_command(TARGET Bootstrap POST_BUILD

@@ -1,0 +1,18 @@
+# PathStatement for CMake iOS builds
+# iOS apps are sandboxed - all assets MUST be bundled inside the .app
+# All paths are relative to the app bundle root
+
+bundled RD_ANIMATIONS = Animation/
+bundled RD_AUDIO = Audio/
+bundled RD_MESHES = Meshes/
+bundled RD_FONTS = Fonts/
+bundled RD_TEXTURES = Textures/
+bundled RD_SCRIPTS = Scripts/
+bundled RD_COMPILED_MATERIALS = CompiledMaterials/
+bundled RD_SHADER_BINARIES = CompiledShaders/
+bundled RD_GPU_CONFIG = GPUCfg/
+bundled RD_OTHER_FILES = ./
+
+RD_PIPELINE_CACHE = PipelineCaches/
+RD_SCREENSHOTS = Screenshots/
+RD_DEBUG = Debug/

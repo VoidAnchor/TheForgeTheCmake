@@ -24,7 +24,7 @@ source_group("Header Files" FILES ${VB2_HEADERS})
 set(VB2_RENDERER_DIR ${FORGE_COMMON}/Renderer)
 list(APPEND VB2_SOURCES ${VB2_RENDERER_DIR}/VisibilityBuffer2/VisibilityBuffer2.cpp)
 
-if(APPLE)
+if(TARGET_MACOS)
     # macOSAppDelegate.m is compiled in each example, not in the library
     set(VB2_MACOS_DELEGATE ${FORGE_COMMON}/OS/Darwin/macOSAppDelegate.m)
     set_source_files_properties(${VB2_MACOS_DELEGATE} PROPERTIES COMPILE_FLAGS "-fobjc-arc")
@@ -44,6 +44,30 @@ if(APPLE)
     )
     # Output dir is bundle's Resources folder
     set(VB2_OUTPUT_DIR $<TARGET_BUNDLE_CONTENT_DIR:Visibility_Buffer2>/Resources)
+elseif(TARGET_IOS)
+    # iOSAppDelegate.m is compiled in each example (like macOS)
+    set(VB2_IOS_DELEGATE ${FORGE_COMMON}/OS/Darwin/iOSAppDelegate.m)
+    set_source_files_properties(${VB2_IOS_DELEGATE} PROPERTIES COMPILE_FLAGS "-fobjc-arc")
+
+    # LaunchScreen.storyboard for iOS
+    set(VB2_STORYBOARD ${FORGE_ROOT}/Examples_3/Build_Props/XCode/iOS/Base.lproj/LaunchScreen.storyboard)
+    set_source_files_properties(${VB2_STORYBOARD} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+    add_executable(Visibility_Buffer2 MACOSX_BUNDLE ${VB2_SOURCES} ${VB2_HEADERS} ${VB2_IOS_DELEGATE} ${VB2_STORYBOARD})
+    set_target_properties(Visibility_Buffer2 PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.The-Forge.Examples.Visibility_Buffer2"
+        MACOSX_BUNDLE_BUNDLE_NAME "Visibility_Buffer2"
+        MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+        MACOSX_BUNDLE_INFO_PLIST "${FORGE_ROOT}/Examples_3/Build_Props/XCode/iOS/Info.plist"
+        XCODE_ATTRIBUTE_TARGETED_DEVICE_FAMILY "1,2"
+        XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET "14.0"
+        XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
+        XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
+        XCODE_ATTRIBUTE_DEVELOPMENT_TEAM "${CMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM}"
+    )
+    # Output dir is bundle's Resources folder (iOS uses same structure)
+    set(VB2_OUTPUT_DIR $<TARGET_BUNDLE_CONTENT_DIR:Visibility_Buffer2>)
 else()
     add_executable(Visibility_Buffer2 WIN32 ${VB2_SOURCES} ${VB2_HEADERS})
     set(VB2_OUTPUT_DIR $<TARGET_FILE_DIR:Visibility_Buffer2>)
@@ -54,7 +78,7 @@ set_property(TARGET Visibility_Buffer2 PROPERTY CXX_STANDARD 17)
 set_property(TARGET Visibility_Buffer2 PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${VB2_OUTPUT_DIR}")
 
 # On Apple platforms, example source files need OBJCXX with ARC
-if(APPLE)
+if(APPLE_PLATFORM)
     set_source_files_properties(
         ${VB2_SRC_DIR}/Visibility_Buffer.cpp
         ${VB2_SRC_DIR}/SanMiguel.cpp
@@ -89,8 +113,10 @@ if(DX12)
     set(FSL_LANG "DIRECT3D12")
 elseif(VULKAN)
     set(FSL_LANG "VULKAN")
-elseif(METAL)
+elseif(TARGET_MACOS)
     set(FSL_LANG "MACOS")
+elseif(TARGET_IOS)
+    set(FSL_LANG "IOS")
 endif()
 
 compile_fsl_shaders(
@@ -107,7 +133,7 @@ compile_common_shaders(
 )
 
 # Copy resources
-if(APPLE)
+if(TARGET_MACOS)
     add_custom_command(TARGET Visibility_Buffer2 POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/GPUCfg"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${VB2_SRC_DIR}/GPUCfg/gpu.cfg" "${VB2_OUTPUT_DIR}/GPUCfg/gpu.cfg"
@@ -119,6 +145,29 @@ if(APPLE)
         COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Debug"
         COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Scripts"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_COMMON}/Scripts" "${VB2_OUTPUT_DIR}/Scripts"
+    )
+elseif(TARGET_IOS)
+    # iOS apps are sandboxed - ALL assets must be bundled
+    add_custom_command(TARGET Visibility_Buffer2 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/GPUCfg"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${VB2_SRC_DIR}/GPUCfg/gpu.cfg" "${VB2_OUTPUT_DIR}/GPUCfg/gpu.cfg"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FORGE_ROOT}/Art/cameraPath.txt" "${VB2_OUTPUT_DIR}/cameraPath.txt"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/../PathStatement.CMake.iOS.txt" "${VB2_OUTPUT_DIR}/PathStatement.txt"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FORGE_COMMON}/OS/Darwin/apple_gpu.data" "${VB2_OUTPUT_DIR}/gpu.data"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/PipelineCaches"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Screenshots"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Debug"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Scripts"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_COMMON}/Scripts" "${VB2_OUTPUT_DIR}/Scripts"
+        # Bundle all required Art assets for iOS
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Fonts"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Fonts" "${VB2_OUTPUT_DIR}/Fonts"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Textures"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Textures/dds" "${VB2_OUTPUT_DIR}/Textures"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Meshes"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Meshes" "${VB2_OUTPUT_DIR}/Meshes"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Animation"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Animation" "${VB2_OUTPUT_DIR}/Animation"
     )
 else()
     add_custom_command(TARGET Visibility_Buffer2 POST_BUILD

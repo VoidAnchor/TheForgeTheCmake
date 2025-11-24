@@ -132,22 +132,42 @@ if(DX12)
     list(APPEND RENDER_DEFINES "DIRECT3D12")
 endif()
 
-# Apple platform libraries
+# Apple platform libraries - common to both macOS and iOS
 if(APPLE_PLATFORM)
-    find_library(APPLE_APPKIT AppKit)
     find_library(APPLE_QUARTZCORE QuartzCore)
-    find_library(APPLE_IOKIT IOKit)
     find_library(APPLE_GAMECONTROLLER GameController)
     find_library(APPLE_COREHAPTICS CoreHaptics)
-    find_library(APPLE_CORESERVICES CoreServices)
 
     list(APPEND RENDER_LIBRARIES
         ${APPLE_QUARTZCORE}
-        ${APPLE_APPKIT}
-        ${APPLE_IOKIT}
         ${APPLE_GAMECONTROLLER}
         ${APPLE_COREHAPTICS}
+    )
+endif()
+
+# macOS-specific frameworks
+if(TARGET_MACOS)
+    find_library(APPLE_APPKIT AppKit)
+    find_library(APPLE_IOKIT IOKit)
+    find_library(APPLE_CORESERVICES CoreServices)
+
+    list(APPEND RENDER_LIBRARIES
+        ${APPLE_APPKIT}
+        ${APPLE_IOKIT}
         ${APPLE_CORESERVICES}
+    )
+endif()
+
+# iOS-specific frameworks
+if(TARGET_IOS)
+    find_library(APPLE_UIKIT UIKit)
+    find_library(APPLE_COREVIDEO CoreVideo)
+    find_library(APPLE_COREGRAPHICS CoreGraphics)
+
+    list(APPEND RENDER_LIBRARIES
+        ${APPLE_UIKIT}
+        ${APPLE_COREVIDEO}
+        ${APPLE_COREGRAPHICS}
     )
 endif()
 

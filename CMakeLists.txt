@@ -10,13 +10,23 @@ endif()
 
 # Platform detection
 set(APPLE_PLATFORM OFF)
+set(TARGET_MACOS OFF)
+set(TARGET_IOS OFF)
 set(LINUX OFF)
 set(WINDOWS OFF)
 set(METAL OFF)
 
 if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    message(STATUS "Apple platform detected")
+    message(STATUS "macOS platform detected")
     set(APPLE_PLATFORM ON)
+    set(TARGET_MACOS ON)
+    set(METAL ON)
+endif()
+
+if(CMAKE_SYSTEM_NAME MATCHES "iOS")
+    message(STATUS "iOS platform detected")
+    set(APPLE_PLATFORM ON)
+    set(TARGET_IOS ON)
     set(METAL ON)
 endif()
 
@@ -36,6 +46,11 @@ option(DX12 "DirectX 12 (Windows only)" OFF)
 option(VULKAN "Vulkan" OFF)
 option(EXAMPLES "Build The Forge examples" OFF)
 option(DYNAMIC_LIB "Build as dynamic library" OFF)
+
+# iOS code signing - set your team ID with -DCMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM=XXXXXXXXXX
+if(TARGET_IOS AND NOT CMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM)
+    message(WARNING "iOS builds require a development team. Set -DCMAKE_XCODE_ATTRIBUTE_DEVELOPMENT_TEAM=<your-team-id>")
+endif()
 
 # Set API defaults if none specified
 if(NOT DX12 AND NOT VULKAN AND NOT METAL)
