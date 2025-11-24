@@ -108,7 +108,7 @@ elseif(TARGET_IOS)
         COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Fonts"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Fonts" "${BOOTSTRAP_OUTPUT_DIR}/Fonts"
         COMMAND ${CMAKE_COMMAND} -E make_directory "${BOOTSTRAP_OUTPUT_DIR}/Textures"
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Textures/dds" "${BOOTSTRAP_OUTPUT_DIR}/Textures"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Textures/ktx" "${BOOTSTRAP_OUTPUT_DIR}/Textures"
     )
 else()
     add_custom_command(TARGET Bootstrap POST_BUILD

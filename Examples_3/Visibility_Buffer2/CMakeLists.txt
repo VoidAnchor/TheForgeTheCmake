@@ -159,15 +159,13 @@ elseif(TARGET_IOS)
         COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Debug"
         COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Scripts"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_COMMON}/Scripts" "${VB2_OUTPUT_DIR}/Scripts"
-        # Bundle all required Art assets for iOS
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Fonts"
+        # Bundle ALL Art assets for iOS
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Fonts" "${VB2_OUTPUT_DIR}/Fonts"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Textures"
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Textures/dds" "${VB2_OUTPUT_DIR}/Textures"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Meshes"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Textures/ktx" "${VB2_OUTPUT_DIR}/Textures"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Meshes" "${VB2_OUTPUT_DIR}/Meshes"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${VB2_OUTPUT_DIR}/Animation"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Animation" "${VB2_OUTPUT_DIR}/Animation"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/Audio" "${VB2_OUTPUT_DIR}/Audio"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${FORGE_ROOT}/Art/SDF" "${VB2_OUTPUT_DIR}/SDF"
     )
 else()
     add_custom_command(TARGET Visibility_Buffer2 POST_BUILD
