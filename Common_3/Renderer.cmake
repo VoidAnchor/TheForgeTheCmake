@@ -22,7 +22,7 @@ set(RESOURCE_LOADER_FILES
     ${RESOURCES_DIR}/ResourceLoader/TextureContainers.h
 )
 
-# Renderer subsystems
+# Renderer subsystems (VisibilityBuffer2 is example-specific, not included here)
 set(RENDERER_PARTICLE_FILES
     ${RENDERER_DIR}/ParticleSystem/ParticleSystem.cpp
     ${RENDERER_DIR}/Interfaces/IParticleSystem.h
@@ -30,7 +30,6 @@ set(RENDERER_PARTICLE_FILES
 
 set(RENDERER_VISBUFFER_FILES
     ${RENDERER_DIR}/VisibilityBuffer/VisibilityBuffer.cpp
-    ${RENDERER_DIR}/VisibilityBuffer2/VisibilityBuffer2.cpp
     ${RENDERER_DIR}/Interfaces/IVisibilityBuffer.h
     ${RENDERER_DIR}/Interfaces/IVisibilityBuffer2.h
 )
@@ -138,11 +137,17 @@ if(APPLE_PLATFORM)
     find_library(APPLE_APPKIT AppKit)
     find_library(APPLE_QUARTZCORE QuartzCore)
     find_library(APPLE_IOKIT IOKit)
+    find_library(APPLE_GAMECONTROLLER GameController)
+    find_library(APPLE_COREHAPTICS CoreHaptics)
+    find_library(APPLE_CORESERVICES CoreServices)
 
     list(APPEND RENDER_LIBRARIES
         ${APPLE_QUARTZCORE}
         ${APPLE_APPKIT}
         ${APPLE_IOKIT}
+        ${APPLE_GAMECONTROLLER}
+        ${APPLE_COREHAPTICS}
+        ${APPLE_CORESERVICES}
     )
 endif()
 
@@ -163,5 +168,23 @@ if(WINDOWS)
         ${GRAPHICS_DIR}/ThirdParty/OpenSource/nvapi
         ${GRAPHICS_DIR}/ThirdParty/OpenSource/DirectXShaderCompiler/inc
         ${GRAPHICS_DIR}/ThirdParty/OpenSource/Direct3d12Agility/include
+    )
+endif()
+
+# On Apple platforms, certain C++ files need to be compiled as Objective-C++
+# (based on Xcode project: explicitFileType = sourcecode.cpp.objcpp)
+if(APPLE_PLATFORM)
+    set_source_files_properties(
+        ${GRAPHICS_DIR}/GraphicsConfig.cpp
+        ${RESOURCES_DIR}/ResourceLoader/ResourceLoader.cpp
+        ${RENDERER_DIR}/ParticleSystem/ParticleSystem.cpp
+        ${RENDERER_DIR}/VisibilityBuffer/VisibilityBuffer.cpp
+        PROPERTIES LANGUAGE OBJCXX COMPILE_FLAGS "-fobjc-arc"
+    )
+    # Metal files need ARC
+    set_source_files_properties(
+        ${GRAPHICS_DIR}/Metal/MetalRaytracing.mm
+        ${GRAPHICS_DIR}/Metal/MetalRenderer.mm
+        PROPERTIES COMPILE_FLAGS "-fobjc-arc"
     )
 endif()

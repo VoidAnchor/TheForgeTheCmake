@@ -68,3 +68,14 @@ set(GAME_FILES
     ${GAME_SCRIPTING_FILES}
     ${GAME_LUA_FILES}
 )
+
+# On Apple platforms, certain C++ files need to be compiled as Objective-C++
+# (based on Xcode project: explicitFileType = sourcecode.cpp.objcpp)
+if(APPLE_PLATFORM)
+    set_source_files_properties(
+        ${GAME_DIR}/Scripting/LuaManager.cpp
+        ${GAME_DIR}/Scripting/LuaManagerImpl.cpp
+        ${GAME_DIR}/Scripting/LuaSystem.cpp
+        PROPERTIES LANGUAGE OBJCXX
+    )
+endif()

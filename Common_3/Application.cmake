@@ -77,3 +77,17 @@ set(APPLICATION_FILES
     ${APP_UI_FILES}
     ${APP_IMGUI_FILES}
 )
+
+# On Apple platforms, certain C++ files need to be compiled as Objective-C++
+# (based on Xcode project: explicitFileType = sourcecode.cpp.objcpp)
+if(APPLE_PLATFORM)
+    set_source_files_properties(
+        ${APP_DIR}/CameraController.cpp
+        ${APP_DIR}/Fonts/FontSystem.cpp
+        ${APP_DIR}/Profiler/GpuProfiler.cpp
+        ${APP_DIR}/Profiler/ProfilerBase.cpp
+        ${APP_DIR}/Screenshot/Screenshot.cpp
+        ${APP_DIR}/UI/UI.cpp
+        PROPERTIES LANGUAGE OBJCXX
+    )
+endif()

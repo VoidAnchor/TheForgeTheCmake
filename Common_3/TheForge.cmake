@@ -2,24 +2,24 @@
 # Creates OS and Renderer libraries
 
 set(FORGE_INCLUDES
-    ../The-Forge/Common_3/
-    ../The-Forge/Common_3/Application/
-    ../The-Forge/Common_3/Application/Interfaces/
-    ../The-Forge/Common_3/Game/
-    ../The-Forge/Common_3/Game/Interfaces/
-    ../The-Forge/Common_3/Graphics/
-    ../The-Forge/Common_3/Graphics/Interfaces/
-    ../The-Forge/Common_3/OS/
-    ../The-Forge/Common_3/OS/Interfaces/
-    ../The-Forge/Common_3/Renderer/
-    ../The-Forge/Common_3/Renderer/Interfaces/
-    ../The-Forge/Common_3/Resources/
-    ../The-Forge/Common_3/Resources/ResourceLoader/
-    ../The-Forge/Common_3/Resources/ResourceLoader/Interfaces/
-    ../The-Forge/Common_3/Resources/AnimationSystem/Animation/
-    ../The-Forge/Common_3/Utilities/
-    ../The-Forge/Common_3/Utilities/Interfaces/
-    ../The-Forge/Common_3/Utilities/ThirdParty/OpenSource/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Application/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Application/Interfaces/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Game/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Game/Interfaces/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Graphics/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Graphics/Interfaces/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/OS/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/OS/Interfaces/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Renderer/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Renderer/Interfaces/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Resources/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Resources/ResourceLoader/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Resources/ResourceLoader/Interfaces/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Resources/AnimationSystem/Animation/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Utilities/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Utilities/Interfaces/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../The-Forge/Common_3/Utilities/ThirdParty/OpenSource/
     ${RENDER_INCLUDES}
 )
 

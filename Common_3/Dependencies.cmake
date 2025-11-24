@@ -141,3 +141,12 @@ source_group(Resources/Animation FILES ${ANIMATION_FILES})
 
 # Third party dependencies list
 set(THIRD_PARTY_DEPS Ozz)
+
+# On Apple platforms, certain animation files need to be compiled as Objective-C++
+# (based on Xcode project: explicitFileType = sourcecode.cpp.objcpp)
+if(APPLE_PLATFORM)
+    set_source_files_properties(
+        ${ANIMATION_DIR}/SkeletonBatcher.cpp
+        PROPERTIES LANGUAGE OBJCXX
+    )
+endif()

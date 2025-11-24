@@ -13,11 +13,15 @@ set(UTIL_INTERFACES_FILES
     ${UTIL_DIR}/Interfaces/IToolFileSystem.h
 )
 
-# FileSystem
+# FileSystem - base files
 set(UTIL_FILESYSTEM_FILES
     ${UTIL_DIR}/FileSystem/FileSystem.c
-    
 )
+
+# Platform-specific file system files
+if(APPLE_PLATFORM OR LINUX)
+    list(APPEND UTIL_FILESYSTEM_FILES ${UTIL_DIR}/FileSystem/UnixFileSystem.c)
+endif()
 
 # Log
 set(UTIL_LOG_FILES
@@ -123,3 +127,4 @@ set(UTILITIES_FILES
     ${UTIL_LZ4_FILES}
     ${UTIL_ZSTD_FILES}
 )
+

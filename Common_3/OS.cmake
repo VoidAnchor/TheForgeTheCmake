@@ -14,9 +14,8 @@ set(OS_CPUCONFIG_FILES
     ${OS_DIR}/CPUConfig.h
 )
 
-# Input/HID
-set(OS_INPUT_FILES
-    ${OS_DIR}/Input/HID/HIDInput.cpp
+# Input/HID - Note: HIDInput.cpp and hidapi are NOT used on macOS (uses DarwinInput.mm instead)
+set(OS_INPUT_HEADERS
     ${OS_DIR}/Input/HID/HIDInput.h
     ${OS_DIR}/Input/HID/HIDParserPS4Controller.h
     ${OS_DIR}/Input/HID/HIDParserPS5Controller.h
@@ -24,6 +23,12 @@ set(OS_INPUT_FILES
     ${OS_DIR}/Input/InputCommon.h
     ${OS_DIR}/Input/TouchInput.h
 )
+
+# HIDInput.cpp is only for Windows/Linux, not macOS
+set(OS_INPUT_FILES ${OS_INPUT_HEADERS})
+if(NOT APPLE_PLATFORM)
+    list(APPEND OS_INPUT_FILES ${OS_DIR}/Input/HID/HIDInput.cpp)
+endif()
 
 # Window System
 set(OS_WINDOWSYSTEM_FILES
@@ -79,10 +84,9 @@ set(OS_DARWIN_FILES
 )
 
 # macOS specific files
+# Note: macOSAppDelegate.m is NOT in the library - it's compiled in each example
 set(OS_MACOS_FILES
     ${OS_DIR}/Darwin/macOSBase.mm
-    ${OS_DIR}/Darwin/macOSAppDelegate.h
-    ${OS_DIR}/Darwin/macOSAppDelegate.m
     ${OS_DIR}/Darwin/macOSWindow.mm
 )
 
@@ -126,6 +130,7 @@ set(OS_HIDAPI_WINDOWS ${OS_HIDAPI_DIR}/windows/hid.c)
 set(OS_HIDAPI_LINUX ${OS_HIDAPI_DIR}/linux/hid.c)
 set(OS_HIDAPI_MACOS ${OS_HIDAPI_DIR}/mac/hid.c)
 
+
 # Source groups for IDE organization
 source_group(OS/Interfaces FILES ${OS_INTERFACES_FILES})
 source_group(OS/Input FILES ${OS_INPUT_FILES})
@@ -136,11 +141,11 @@ set(OS_PLATFORM_SPECIFIC_FILES "")
 
 if(APPLE_PLATFORM)
     source_group(OS/Darwin FILES ${OS_DARWIN_FILES} ${OS_MACOS_FILES})
-    set(OS_PLATFORM_SPECIFIC_FILES 
-        ${OS_DARWIN_FILES} 
+    # Note: hidapi is NOT used on macOS - DarwinInput.mm uses native APIs
+    set(OS_PLATFORM_SPECIFIC_FILES
+        ${OS_DARWIN_FILES}
         ${OS_MACOS_FILES}
         ${OS_CPU_FEATURES_MACOS}
-        ${OS_HIDAPI_MACOS}
     )
 endif()
 
@@ -171,3 +176,22 @@ set(OS_FILES
     ${OS_CPU_FEATURES_COMMON}
     ${OS_PLATFORM_SPECIFIC_FILES}
 )
+
+# On Apple platforms, enable ARC for Objective-C/C++ files
+if(APPLE_PLATFORM)
+    set_source_files_properties(
+        ${OS_DIR}/Darwin/CocoaFileSystem.mm
+        ${OS_DIR}/Darwin/CocoaToolsFileSystem.mm
+        ${OS_DIR}/Darwin/DarwinInput.mm
+        ${OS_DIR}/Darwin/macOSBase.mm
+        ${OS_DIR}/Darwin/macOSWindow.mm
+        PROPERTIES COMPILE_FLAGS "-fobjc-arc"
+    )
+
+    # These C++ files include Metal/AppKit headers and must be compiled as Objective-C++
+    # (based on Xcode project: explicitFileType = sourcecode.cpp.objcpp)
+    set_source_files_properties(
+        ${OS_DIR}/WindowSystem/WindowSystem.cpp
+        PROPERTIES LANGUAGE OBJCXX COMPILE_FLAGS "-fobjc-arc"
+    )
+endif()

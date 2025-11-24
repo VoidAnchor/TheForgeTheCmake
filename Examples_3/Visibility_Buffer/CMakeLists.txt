@@ -3,7 +3,6 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
 
 set(VB_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../The-Forge/Examples_3/Visibility_Buffer/src)
-set(VB_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>)
 set(FORGE_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../The-Forge)
 set(FORGE_COMMON ${FORGE_ROOT}/Common_3)
 
@@ -20,10 +19,35 @@ set(VB_HEADERS
 source_group("Source Files" FILES ${VB_SOURCES})
 source_group("Header Files" FILES ${VB_HEADERS})
 
-add_executable(Visibility_Buffer WIN32 ${VB_SOURCES} ${VB_HEADERS})
+if(APPLE)
+    add_executable(Visibility_Buffer MACOSX_BUNDLE ${VB_SOURCES} ${VB_HEADERS})
+    set_target_properties(Visibility_Buffer PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.The-Forge.Examples.Visibility_Buffer"
+        MACOSX_BUNDLE_BUNDLE_NAME "Visibility_Buffer"
+        MACOSX_BUNDLE_BUNDLE_VERSION "1.0"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0"
+        MACOSX_BUNDLE_COPYRIGHT "Copyright 2017 Confetti. All rights reserved."
+    )
+    # Output dir is bundle's Resources folder
+    set(VB_OUTPUT_DIR $<TARGET_BUNDLE_CONTENT_DIR:Visibility_Buffer>/Resources)
+else()
+    add_executable(Visibility_Buffer WIN32 ${VB_SOURCES} ${VB_HEADERS})
+    set(VB_OUTPUT_DIR $<TARGET_FILE_DIR:Visibility_Buffer>)
+endif()
+
 target_link_libraries(Visibility_Buffer Renderer OS)
 set_property(TARGET Visibility_Buffer PROPERTY CXX_STANDARD 17)
 set_property(TARGET Visibility_Buffer PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${VB_OUTPUT_DIR}")
+
+# On Apple platforms, example source files need OBJCXX
+# (based on Xcode project: explicitFileType = sourcecode.cpp.objcpp)
+if(APPLE)
+    set_source_files_properties(
+        ${VB_SRC_DIR}/Visibility_Buffer.cpp
+        ${VB_SRC_DIR}/SanMiguel.cpp
+        PROPERTIES LANGUAGE OBJCXX
+    )
+endif()
 
 if(WIN32)
     target_link_libraries(Visibility_Buffer Xinput9_1_0.lib ws2_32.lib)
@@ -50,6 +74,8 @@ if(DX12)
     set(FSL_LANG "DIRECT3D12")
 elseif(VULKAN)
     set(FSL_LANG "VULKAN")
+elseif(METAL)
+    set(FSL_LANG "MACOS")
 endif()
 
 compile_fsl_shaders(

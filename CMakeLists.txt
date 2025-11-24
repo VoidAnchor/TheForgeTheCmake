@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.15)
 
 project(The-Forge)
 
+# Enable Objective-C/C++ for Apple platforms
+if(APPLE)
+    enable_language(OBJC)
+    enable_language(OBJCXX)
+endif()
+
 # Platform detection
 set(APPLE_PLATFORM OFF)
 set(LINUX OFF)
