@@ -1,4 +1,5 @@
 [Bb]uild
+build-macos
 out
 *.exe
 *.so
